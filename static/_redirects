@@ -1,0 +1,47 @@
+# 301 redirects from the current sdvoe.org URLs to the new structure.
+# Format: Netlify and Cloudflare Pages (_redirects). For Vercel see vercel.json.
+
+# Technology: five pages merged into /technology/
+/power-of-10/                                  /technology/#power-of-10          301
+/power-of-10                                   /technology/#power-of-10          301
+/technology/the-matrix-transformed/            /technology/#beyond-the-matrix    301
+/technology/benefits/                          /technology/#benefits             301
+/technology/av-it-convergence/                 /technology/#convergence          301
+/technology/sustainability-shootout/           /technology/#sustainability       301
+
+# Comparisons: two pages merged into /technology/compare/
+/technology/sdvoe-vs-hdbaset/                  /technology/compare/              301
+/technology/sdvoe-vs-ipmx/                     /technology/compare/              301
+
+# Use cases and case studies → /solutions/
+/technology/use-cases/                         /solutions/#applications          301
+/technology/use-cases/designing-matrix-switches/ /solutions/#matrix              301
+/technology/use-cases/designing-kvm-switches/  /solutions/#kvm                   301
+/technology/use-cases/designing-video-walls/   /solutions/#video-walls           301
+/technology/use-cases/designing-multiviewers/  /solutions/#multiview             301
+/technology/use-cases/medical/                 /solutions/#sectors               301
+/technology/case-studies/                      /solutions/#case-studies          301
+/technology/case-studies/*                     /solutions/case-studies/:splat    301
+
+# Products
+/products/certified-products/                  /products/#finder                 301
+
+# Academy and certifications → /learn/
+/academy/                                      /learn/                           301
+/alliance/design-partners/                     /learn/#certifications            301
+/alliance/design-partners/certified/           /learn/#partners                  301
+/alliance/design-partners/sdvoe-certified-design-houses/ /learn/#partners        301
+/alliance/sdvoe-product-interoperability-certification/ /learn/#certifications   301
+
+# Alliance
+/alliance/members/                             /alliance/#members                301
+/alliance/membership/                          /alliance/#join                   301
+/alliance/faq/                                 /alliance/#faq                    301
+/board-of-directors/                           /alliance/#board                  301
+/board-of-directors/*                          /alliance/board/:splat            301
+
+# News, blog and events → /news/
+/events/                                       /news/#events                     301
+/news/press-releases/                          /news/                            301
+/news/member-press-releases/                   /news/                            301
+/blog/                                         /news/                            301

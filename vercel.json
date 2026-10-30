@@ -1,0 +1,160 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/power-of-10/",
+      "destination": "/technology/#power-of-10",
+      "permanent": true
+    },
+    {
+      "source": "/power-of-10",
+      "destination": "/technology/#power-of-10",
+      "permanent": true
+    },
+    {
+      "source": "/technology/the-matrix-transformed/",
+      "destination": "/technology/#beyond-the-matrix",
+      "permanent": true
+    },
+    {
+      "source": "/technology/benefits/",
+      "destination": "/technology/#benefits",
+      "permanent": true
+    },
+    {
+      "source": "/technology/av-it-convergence/",
+      "destination": "/technology/#convergence",
+      "permanent": true
+    },
+    {
+      "source": "/technology/sustainability-shootout/",
+      "destination": "/technology/#sustainability",
+      "permanent": true
+    },
+    {
+      "source": "/technology/sdvoe-vs-hdbaset/",
+      "destination": "/technology/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/technology/sdvoe-vs-ipmx/",
+      "destination": "/technology/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/technology/use-cases/",
+      "destination": "/solutions/#applications",
+      "permanent": true
+    },
+    {
+      "source": "/technology/use-cases/designing-matrix-switches/",
+      "destination": "/solutions/#matrix",
+      "permanent": true
+    },
+    {
+      "source": "/technology/use-cases/designing-kvm-switches/",
+      "destination": "/solutions/#kvm",
+      "permanent": true
+    },
+    {
+      "source": "/technology/use-cases/designing-video-walls/",
+      "destination": "/solutions/#video-walls",
+      "permanent": true
+    },
+    {
+      "source": "/technology/use-cases/designing-multiviewers/",
+      "destination": "/solutions/#multiview",
+      "permanent": true
+    },
+    {
+      "source": "/technology/use-cases/medical/",
+      "destination": "/solutions/#sectors",
+      "permanent": true
+    },
+    {
+      "source": "/technology/case-studies/",
+      "destination": "/solutions/#case-studies",
+      "permanent": true
+    },
+    {
+      "source": "/technology/case-studies/:slug*",
+      "destination": "/solutions/case-studies/:slug*",
+      "permanent": true
+    },
+    {
+      "source": "/products/certified-products/",
+      "destination": "/products/#finder",
+      "permanent": true
+    },
+    {
+      "source": "/academy/",
+      "destination": "/learn/",
+      "permanent": true
+    },
+    {
+      "source": "/alliance/design-partners/",
+      "destination": "/learn/#certifications",
+      "permanent": true
+    },
+    {
+      "source": "/alliance/design-partners/certified/",
+      "destination": "/learn/#partners",
+      "permanent": true
+    },
+    {
+      "source": "/alliance/design-partners/sdvoe-certified-design-houses/",
+      "destination": "/learn/#partners",
+      "permanent": true
+    },
+    {
+      "source": "/alliance/sdvoe-product-interoperability-certification/",
+      "destination": "/learn/#certifications",
+      "permanent": true
+    },
+    {
+      "source": "/alliance/members/",
+      "destination": "/alliance/#members",
+      "permanent": true
+    },
+    {
+      "source": "/alliance/membership/",
+      "destination": "/alliance/#join",
+      "permanent": true
+    },
+    {
+      "source": "/alliance/faq/",
+      "destination": "/alliance/#faq",
+      "permanent": true
+    },
+    {
+      "source": "/board-of-directors/",
+      "destination": "/alliance/#board",
+      "permanent": true
+    },
+    {
+      "source": "/board-of-directors/:slug*",
+      "destination": "/alliance/board/:slug*",
+      "permanent": true
+    },
+    {
+      "source": "/events/",
+      "destination": "/news/#events",
+      "permanent": true
+    },
+    {
+      "source": "/news/press-releases/",
+      "destination": "/news/",
+      "permanent": true
+    },
+    {
+      "source": "/news/member-press-releases/",
+      "destination": "/news/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/",
+      "destination": "/news/",
+      "permanent": true
+    }
+  ]
+}

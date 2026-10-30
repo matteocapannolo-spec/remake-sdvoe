@@ -1,0 +1,25 @@
+{
+  "name": "sdvoe-remake",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "images": "node scripts/fetch-images.mjs",
+    "import": "node scripts/import-content.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/open-sans": "^5.3.0",
+    "@lucide/svelte": "^1.65.0",
+    "@sveltejs/adapter-static": "^3.0.10",
+    "@sveltejs/kit": "^2.70.3",
+    "@sveltejs/vite-plugin-svelte": "^6.0.0",
+    "flag-icons": "^7.6.0",
+    "node-html-parser": "^9.0.5",
+    "sharp": "^0.35.5",
+    "svelte": "^5.57.3",
+    "vite": "^7.0.0"
+  }
+}

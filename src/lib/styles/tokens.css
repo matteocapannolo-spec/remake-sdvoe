@@ -1,0 +1,104 @@
+/*
+ * SDVoE design tokens — v0.2
+ * Structure, geometry and components follow DESIGN-dji.md: a white "showroom" canvas,
+ * square gutter-separated tiles, every action a pill in one blue, ink at stepped opacities,
+ * tight negative tracking, flat grey bands and a charcoal footer.
+ * Typeface: Open Sans (as DJI). Brand colours stay SDVoE blues.
+ */
+:root {
+	/* ── SDVoE brand (sampled from sdvoe.org and the logo) ── */
+	--sdvoe-deep-blue: #0c67ba;
+	--sdvoe-sky-blue: #31a3e3;
+	--sdvoe-gray: #58595b;
+
+	/* ── Action colour: one blue, always a pill (DJI primary → SDVoE Deep Blue) ── */
+	--primary: var(--sdvoe-deep-blue);
+	--primary-hover: #0a5598;
+	--primary-tint: #e3eef9; /* DJI store-blue-tint → pale Deep Blue, for the soft pill */
+	--on-primary: #ffffff;
+	--accent: var(--sdvoe-sky-blue); /* used on dark surfaces only (fails contrast as text on white) */
+
+	/* ── Rank label (DJI tier-orange replaced by the SDVoE blues): Deep Blue on light surfaces,
+	   Sky Blue on dark ones (.on-dark .tier). Small eyebrows and badges only. ── */
+	--tier: var(--sdvoe-deep-blue);
+
+	/* ── Ink at stepped opacities (DJI), grey step = SDVoE grey ── */
+	--ink: #262626;
+	--ink-secondary: var(--sdvoe-gray); /* ≈ DJI #595959 */
+	--ink-tertiary: #6e6e6e; /* DJI #8c8c8c darkened to pass WCAG AA (4.9:1) */
+	--nav-ink: #303233;
+	--steel: #707477; /* DJI #9fa3a6 darkened to pass WCAG AA (4.7:1) */
+
+	/* ── Surfaces ── */
+	--canvas: #ffffff;
+	--canvas-soft: #f7f9fa; /* feature-link band, panels */
+	--panel: #f6f8f9;
+	--fog: #f5f5f5; /* product tiles, explore band */
+	--announce: #fafafa;
+	--media-black: #0b0d10;
+	--footer: #272727;
+	--footer-pill: #383838;
+	--footer-divider: #414141;
+	--footer-link: #b3b3b3;
+
+	/* ── Lines ── */
+	--hairline: #f0f0f0;
+	--divider: #e8e8e8;
+	--card-border: #d9d9d9;
+	--input-border: #d4d7d9;
+
+	/* ── Typography: Open Sans, as on dji.com — 400 text, 500 feature titles, 600 headings ── */
+	--font: 'Open Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+	--w-light: 400;
+	--w-text: 400;
+	--w-medium: 500;
+	--w-bold: 600;
+
+	--fs-display-xl: clamp(2.25rem, 1.6rem + 2.4vw, 3.5rem); /* hero 36 → 56 */
+	--fs-display: clamp(2rem, 1.6rem + 1.5vw, 2.5rem); /* 32 → 40 */
+	--fs-heading: clamp(1.625rem, 1.4rem + 0.9vw, 2rem); /* 26 → 32 */
+	--fs-news: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem); /* 22 → 28 */
+	--fs-title: 1.5rem; /* 24 */
+	--fs-subhead: 1.25rem; /* 20 */
+	--fs-body: 1rem;
+	--fs-ui: 0.875rem;
+	--fs-caption: 0.75rem;
+
+	--track-heading: -0.03em;
+	--track-body: -0.02em;
+
+	/* ── Shape: tiles square, only pills / option cards / tags rounded ── */
+	--r-none: 0;
+	--r-xs: 4px;
+	--r-sm: 8px;
+	--r-pill: 60px;
+	--r-full: 9999px;
+
+	/* ── Spacing (4px base) ── */
+	--s-xxs: 4px;
+	--s-xs: 8px;
+	--s-sm: 12px;
+	--s-md: 16px;
+	--s-lg: 20px;
+	--s-xl: 24px;
+	--s-xxl: 32px;
+	--s-xxxl: 40px;
+	--s-huge: 48px;
+	--s-section: clamp(48px, 3vw + 36px, 64px);
+	--s-section-lg: clamp(64px, 5vw + 40px, 112px);
+
+	--container: 1200px;
+	--gutter: clamp(16px, 3vw, 32px);
+	--tile-gap: 16px;
+	--nav-h: 64px;
+
+	/* aliases kept for page styles */
+	--hairline-soft: var(--divider);
+	--inverse-text-faint: rgb(255 255 255 / 0.65);
+	--r-md: 0;
+	--field: var(--fog);
+	--text-muted: var(--ink-secondary);
+	--text-faint: var(--steel);
+
+	--float-shadow: 0 8px 16px rgb(0 0 0 / 0.1); /* floating elements only */
+}

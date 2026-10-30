@@ -1,0 +1,132 @@
+{
+ "updated": "2026-01-08",
+ "people": [
+  {
+   "slug": "stephane-tremblay",
+   "name": "Stephane Tremblay",
+   "company": "SDVoE Alliance",
+   "role": "President",
+   "photo": "stephane-tremblay-1.jpg",
+   "bio": [
+    {
+     "type": "p",
+     "text": "Stephane Tremblay stands as the co-founder of AptoVision, the pioneering force behind SDVoE technology. Embarking on an ambitious journey, he meticulously crafted the SDVoE technology from its conceptualization in his basement to the momentous sale of AptoVision to Semtech in 2017. Acknowledged as the mastermind behind the widely utilized BlueRiver processor within the SDVoE framework, Tremblay proudly bears the title of the technology’s progenitor."
+    },
+    {
+     "type": "p",
+     "text": "Presently, Tremblay assumes the crucial roles of Chief Technology Officer (CTO) within Semtech’s Pro-AV division and serves as the President of the SDVoE Alliance. Unyielding in his pursuit of innovation, Tremblay epitomizes a true tech visionary, constantly pushing the boundaries of conventional thinking."
+    },
+    {
+     "type": "p",
+     "text": "The roots of Tremblay’s unconventional approach to problem-solving trace back to his early days at Matrox, where he played a pivotal role during the company’s transition from traditional graphics cards. With a remarkable career spanning over three decades, Tremblay brings a wealth of experience and leadership to the realm of digital video processing. His enduring commitment to shaping the future of technology positions him as a prominent figure in the ever-evolving landscape of audiovisual innovation."
+    }
+   ]
+  },
+  {
+   "slug": "keith-kennedy",
+   "name": "Keith Kennedy",
+   "company": "ProITAV",
+   "role": "Director",
+   "photo": "keith-kennedy.jpg",
+   "bio": [
+    {
+     "type": "p",
+     "text": "Few people have the unique skillset that Keith has crafted during his 30+ years in the industry. He has pulled wire, installed, sold, designed, marketed, programmed and produced award winning integrated systems throughout the western hemisphere. During the second part of his career, he used his knowledge and experience with top manufacturers to help bring relevant products to market. Keith is as comfortable speaking with CEOs and other stakeholders as he is talking shop with integrators and factory technicians. His diverse background includes directing cross-functional teams at Niles Audio and Crestron to create a clear vision of what products should be, how they should work and how they should be brought to market."
+    },
+    {
+     "type": "p",
+     "text": "During his travels, Keith has worked with some of the finest integrators in the business. In 2014, Keith was hired by ProITAV to focus on growing the company’s OEM/ODM business in North America. He opened the United States office that supports all sales, marketing, product management and support for the Americas and Europe."
+    },
+    {
+     "type": "p",
+     "text": "Keith also provides guidance for the ongoing development of ProITAV’s office and business in China. He credits his wife and two children for inspiring him to continually challenge himself and to learn more about technology. Keith also practices Chinese Kung Fu. Keith studied electrical engineering at Miami Dade College."
+    }
+   ]
+  },
+  {
+   "slug": "ryohei-iwasaki",
+   "name": "Ryohei Iwasaki",
+   "company": "IDK Corporation",
+   "role": "Director",
+   "photo": "ryohei-iwasaki.jpg",
+   "bio": [
+    {
+     "type": "p",
+     "text": "Ryohei Iwasaki is the Executive Director of IDK Corporation and CEO of IDK America Inc. He has extensive experience in sales and product develop management and is currently responsible for business development for IDK products all over the world. He brings over 12 years of experience in the Pro AV industry and more than 8 years of product development management experience using the Semtech AptoVision BlueRiver technology."
+    }
+   ]
+  },
+  {
+   "slug": "laurent-masia",
+   "name": "Laurent Masia",
+   "company": "NETGEAR",
+   "role": "Director",
+   "photo": "laurent-masia-1.jpg",
+   "bio": [
+    {
+     "type": "p",
+     "text": "Laurent Masia is the Director of Product Line Management for Managed Switches and Modules at NETGEAR. He has extensive experience in networking, storage and channel distribution and is currently responsible for product portfolio management and business development for NETGEAR Managed Infrastructure."
+    },
+    {
+     "type": "p",
+     "text": "He holds a master in management degree from SKEMA Business School, Sophia Antipolis – France."
+    }
+   ]
+  },
+  {
+   "slug": "jim-banda",
+   "name": "Jim Banda",
+   "company": "Broadata Communications",
+   "role": "Director",
+   "photo": "jim-banda.jpg",
+   "bio": [
+    {
+     "type": "p",
+     "text": "With over twenty years at Broadata Communications, Jim’s journey from VP to Senior VP of Sales & Marketing has honed his expertise in new business development and customer relationship management. Their team has consistently delivered innovative product marketing strategies, contributing to Broadata’s expansion. The mission to empower clients through exceptional service and cutting-edge solutions echoes his professional ethos."
+    },
+    {
+     "type": "p",
+     "text": "Jim’s role involves leveraging deep industry insights to strengthen customer partnerships, fostering a culture of excellence that aligns with Broadata company’s vision for the future."
+    }
+   ]
+  },
+  {
+   "slug": "clark-williams",
+   "name": "Clark Williams",
+   "company": "Christie",
+   "role": "Director",
+   "photo": "clark-williams.jpg",
+   "bio": [
+    {
+     "type": "p",
+     "text": "Clark Williams is Executive Vice President, Content Management and Processing at Christie. He is responsible for all engineering and product management resources for Christie’s content management and processing products—including Christie® Spyder, Christie Phoenix™​, Christie Brio and Christie Pandoras Box. Building on the success of Christie’s content management and image processing portfolios, Clark’s team accelerates the number and range of customer applications in this area, and meets the growing need for unified, application-specific solutions."
+    },
+    {
+     "type": "p",
+     "text": "In July 2007, Clark became Vice President, Windowing and Compositing Solutions, after Christie acquired his company, Vista System, Corp. This acquisition allowed him to focus on high-end image processing products while taking advantage of Christie’s sales strength and global footprint. In October 2016, following a successful consulting period, he re-joined Christie as Executive Vice President, Content Management and Processing."
+    },
+    {
+     "type": "p",
+     "text": "Clark started Vista Systems, Corp., in 1996 in Phoenix, Arizona when he realized there was a huge demand for the hardware tools he’d developed as part of his technical consulting business."
+    }
+   ]
+  },
+  {
+   "slug": "melissa-nolet",
+   "name": "Melissa Nolet",
+   "company": "Semtech",
+   "role": "Director",
+   "photo": "melissa-nolet.jpg",
+   "bio": [
+    {
+     "type": "p",
+     "text": "Melissa Nolet is Director of Marketing and Applications for Semtech’s Analog, Mixed-Signal and Wireless Products Group, leading the development and execution of Semtech’s portfolio of pro AV semiconductor solutions. She brings over 15 years of experience in semiconductor product management and development, including over ten years in the audio/video sector."
+    },
+    {
+     "type": "p",
+     "text": "She holds an MSEE from Northeastern University and an MBA from the Boston University Questrom School of Business."
+    }
+   ]
+  }
+ ]
+}
