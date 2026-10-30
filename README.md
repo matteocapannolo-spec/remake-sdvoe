@@ -15,6 +15,15 @@ npm run preview  # serve /build in locale
 
 Serve Node 20 o superiore.
 
+## Anteprima su GitHub Pages
+
+Ogni push su `main` pubblica un'anteprima su https://matteocapannolo-spec.github.io/remake-sdvoe/ (workflow `.github/workflows/pages.yml`). Non sostituisce sdvoe.org.
+
+- La build dell'anteprima vive nella sottocartella `/remake-sdvoe`: la imposta la variabile `BASE_PATH`. In locale: `BASE_PATH=/remake-sdvoe npm run build` (in Git Bash su Windows anteporre `MSYS_NO_PATHCONV=1`).
+- Ogni build in sottocartella ha `noindex, nofollow`, così l'anteprima non finisce nei motori di ricerca come copia di sdvoe.org. La build normale (`npm run build`) non lo ha.
+- GitHub Pages non gestisce i redirect: `static/_redirects` e `vercel.json` servono solo sull'hosting definitivo.
+- Prima volta: su GitHub, Settings → Pages → Source: **GitHub Actions**.
+
 ## Dove si modifica cosa
 
 | Cosa | Dove |
