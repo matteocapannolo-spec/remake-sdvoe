@@ -35,8 +35,8 @@
 		<div class="body">
 			<p class="t-lead summary">{item.summary}</p>
 
-			{#if item.blocks}
-				{#each item.blocks as b}
+			{#if data.blocks}
+				{#each data.blocks as b}
 					{#if b.type === 'h'}
 						<h2 class="t-h4">{b.text}</h2>
 					{:else if b.type === 'p'}

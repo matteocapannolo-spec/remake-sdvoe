@@ -71,8 +71,11 @@
 	.footer {
 		background: var(--footer);
 		color: var(--footer-link);
-		/* extra room at the bottom so the floating back-to-top button never covers the last line */
-		padding: var(--s-xxl) 0 calc(var(--s-xxl) + 48px);
+		/* the floating back-to-top button is kept clear with right padding on the legal row (see .legal), not a band below it */
+		padding: var(--s-xxl) 0 var(--s-xl);
+		/* room the back-to-top button (40 px, 20 px from the right edge, BackToTop.svelte) needs at the right of the
+		   bottom line, minus the page margin already there; 0 on wide screens. 76 px = 60 px button + 8 px gap + 8 px scrollbar slack */
+		--top-clear: max(0px, 76px - max(var(--gutter), (100vw - var(--container)) / 2));
 		font-size: var(--fs-caption);
 	}
 	.promo {
@@ -169,6 +172,7 @@
 		align-items: center;
 		gap: var(--s-sm) var(--s-xl);
 		padding-top: var(--s-xl);
+		padding-right: var(--top-clear);
 	}
 	.brand {
 		grid-area: brand;
@@ -210,6 +214,14 @@
 			grid-template-areas:
 				'brand links'
 				'copy copy';
+			/* the copyright is the bottom line here: only it makes room for the button, the links stay flush right */
+			padding-right: 0;
+		}
+		.copyright {
+			padding-right: var(--top-clear);
+			/* at least two lines tall, so the links row above stays clear of the button (top 64 px from the bottom)
+			   even where the copyright fits on one line (~900–1023 px) */
+			min-height: 36px;
 		}
 		.legal-links {
 			justify-content: flex-end;

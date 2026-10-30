@@ -2,8 +2,9 @@
 // /technology/case-studies/, read through the WordPress REST API in Oct 2026).
 //
 // Full texts: `npm run import` writes src/lib/content/generated/case-studies.json from the
-// WordPress API. When a case study has full text there, its page renders it; otherwise the page
-// shows the summary and links to the original.
+// WordPress API. They are read only on the server (src/lib/server/caseStudyStories.js): when a
+// case study has full text there, its page renders it; otherwise the page shows the summary and
+// links to the original.
 
 import { img } from './site.js';
 
@@ -53,12 +54,6 @@ pledj|Pledj: AV on a superyacht|2017-10-12|pledj-01.jpg|Hospitality & retail|An 
 // REVIEW: former member — see PROGETTO.md §5, item 10.
 export const FORMER_MEMBERS = ['Black Box', 'ZeeVee'];
 
-const generated = Object.values(import.meta.glob('./generated/case-studies.json', { eager: true, import: 'default' }))[0] ?? [];
-const fullBySlug = Object.fromEntries(generated.map((g) => [g.slug, g]));
-const baseName = (file) => file.replace(/\.\w+$/, '');
-// The hero already shows the cover photo: don't repeat it in the story
-const storyBlocks = (slug, cover) => fullBySlug[slug]?.blocks.filter((b) => !(b.type === 'img' && cover && baseName(b.src) === baseName(cover))) ?? null;
-
 export const caseStudies = rows
 	.trim()
 	.split('\n')
@@ -69,12 +64,12 @@ export const caseStudies = rows
 			title,
 			date,
 			image: image ? img(image) : null,
+			cover: image || null,
 			sector,
 			summary,
 			member: member || null,
 			formerMember: FORMER_MEMBERS.includes(member),
-			original: `https://sdvoe.org/technology/case-studies/${slug}/`,
-			blocks: storyBlocks(slug, image)
+			original: `https://sdvoe.org/technology/case-studies/${slug}/`
 		};
 	})
 	.sort((a, b) => b.date.localeCompare(a.date));

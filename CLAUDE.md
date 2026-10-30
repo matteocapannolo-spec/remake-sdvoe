@@ -24,6 +24,7 @@ dei casi studio mostrino il testo completo. Infine aggiornare la roadmap in PROG
 ## Struttura
 
 - `src/lib/content/` — tutti i contenuti (site.js, technology.js, solutions.js, products.js, caseStudies.js, board.js, generated/)
+- `src/lib/server/` — dati letti solo in fase di build (testi completi dei casi studio): i contenuti pesanti vanno qui, non in `content/`, altrimenti finiscono nel JS di ogni pagina
 - `src/lib/styles/tokens.css` — design token; `global.css` — classi comuni
 - `src/lib/components/` — Nav, Footer, Announcement, PageHero, SubNav, HowItWorks, Render, ExploreCards, WhyBento, BoardCard, BoardGrid, LangSwitch, NeonFiber, LogoWall, CaseCard, Check, Img, Wordmark, Seo, BackToTop
 - `src/routes/` — pagine; `solutions/case-studies/[slug]` è prerenderizzata da `entries()`

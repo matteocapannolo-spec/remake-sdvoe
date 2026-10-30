@@ -3,6 +3,10 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [sveltekit()],
+	build: {
+		// Small images stay separate files: inlined as base64 they ended up in the JS of every page
+		assetsInlineLimit: 0
+	},
 	define: {
 		// Sub-folder of a preview build (e.g. '/remake-sdvoe' on GitHub Pages), '' for the real site.
 		// $app/paths `base` is relative at prerender time, so Seo.svelte needs the absolute value.

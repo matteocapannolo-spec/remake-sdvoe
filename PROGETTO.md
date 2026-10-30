@@ -90,7 +90,13 @@ Base: **DESIGN-dji.md**, cioè uno "showroom": fondo bianco, riquadri squadrati 
 - Accessibilità: link "salta al contenuto", focus visibile, un solo H1 per pagina, tabelle con intestazioni, rispetto di `prefers-reduced-motion` (la striscia dei loghi si ferma).
 - Obiettivi: Lighthouse ≥ 95 in tutte le categorie, LCP < 1,5 s su 4G, meno di 100 KB di JS per pagina.
 - **Misurato (Lighthouse mobile, 30 ottobre 2026, 7 pagine):** prestazioni 99–100, accessibilità 100, SEO 100, best practices 96. Il 96 dipendeva solo dalle immagini caricate da sdvoe.org: dal 30 ottobre tutte le 142 immagini sono in locale (WebP, 18 MB → 5 MB) e la build non fa più richieste a sdvoe.org. LCP 1,1–1,4 s, CLS ≤ 0,004.
-- **Rimisurato (Lighthouse mobile, 30 ottobre 2026, home, Alliance, una biografia del board):** accessibilità, SEO e best practices 100; prestazioni scese a 80–90 (TBT ~350 ms). **Da sistemare prima del lancio:** ogni pagina carica ~360 KB di JS, cioè i testi completi dei 38 casi studio (~200 KB, da caricare solo nella pagina del singolo caso con un `+page.server.js`) e le immagini sotto i 4 KB trasformate in base64 dentro `site.js` (~160 KB, da servire come file con `build.assetsInlineLimit`).
+- **Rimisurato (Lighthouse mobile, 30 ottobre 2026, home, Alliance, una biografia del board):** accessibilità, SEO e best practices 100; prestazioni scese a 80–90 (TBT ~350 ms), con ~360 KB di JS per pagina.
+- **Alleggerimento (30 ottobre 2026):** JS per pagina da ~360 KB a 167–200 KB (62–75 KB compressi).
+  - I testi completi dei casi studio (~200 KB) si leggono solo lato server (`src/lib/server/caseStudyStories.js` + `+page.server.js`): ogni pagina riceve solo il suo testo (nel caso di navigazione interna arriva dal suo `__data.json`).
+  - Le immagini piccole non diventano più base64 nel JS (`build.assetsInlineLimit: 0` in `vite.config.js`).
+  - Il filo neon dell'hero è diviso in tre livelli (sfondo fermo, fibre animate solo in opacità, impulsi fusi con la foto in un passaggio solo) e gli impulsi partono a pagina caricata e si fermano quando l'hero esce dallo schermo.
+  - Lighthouse mobile dopo l'intervento: home 91–93 (era 79, TBT da ~590 a ~200 ms), Alliance e casi studio 96, Technology 90; accessibilità, SEO e best practices 100 ovunque. Le misure in locale oscillano di qualche punto da un'esecuzione all'altra.
+  - Resta sopra l'obiettivo l'LCP della home su mobile (~2,8 s, è la foto dell'hero): da guardare insieme al CSS che blocca il rendering. Il resto del JS è il runtime di Svelte, i componenti e l'elenco degli URL delle immagini (~31 KB, ~5 KB compressi).
 - **Accessibilità:** per superare il contrasto WCAG AA i grigi di DJI sono stati scuriti (#8C8C8C → #6E6E6E, #9FA3A6 → #707477). Le differenze a occhio sono minime. Sky Blue non si usa mai come testo su fondo chiaro (contrasto insufficiente).
 - **Su mobile** lo schema "come funziona" diventa una sequenza verticale, senza scorrimento laterale.
 

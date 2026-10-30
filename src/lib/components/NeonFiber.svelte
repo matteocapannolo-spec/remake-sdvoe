@@ -1,6 +1,7 @@
 <script>
 	// Hero backdrop: a bundle of three neon fibres sweeping up from the lower right, with light
-	// pulses racing along them (speed, low latency, smooth flow). Pure SVG + CSS, no JS.
+	// pulses racing along them (speed, low latency, smooth flow). SVG + CSS; a few lines of JS
+	// only decide when the pulses run.
 	// - Fibres: stacked translucent strokes (no blur filters) with a gradient along their length,
 	//   so they fade in from the bottom and thin out towards the exit.
 	// - Each pulse: a tail that fades away behind it (several translucent dashes of growing length,
@@ -39,14 +40,43 @@
 	// The head runs from the start (0) to the end (1000) of its fibre: dashoffset = len − head.
 	// --rest freezes the pulse part-way for reduced motion.
 	const offsets = (len, rest) => `--len:${len}; --from:${len}; --to:${len - 1000}; --rest:${len - rest}`;
+
+	// The pulses repaint on the main thread every frame, so they start only once the page has
+	// loaded and the browser is idle, and stop while the hero is off screen.
+	let pulsesEl;
+	let loaded = $state(false);
+	let inView = $state(true);
+	$effect(() => {
+		const idle = window.requestIdleCallback ?? ((fn) => setTimeout(fn, 200));
+		const start = () => idle(() => (loaded = true), { timeout: 2000 });
+		if (document.readyState === 'complete') start();
+		else window.addEventListener('load', start, { once: true });
+		const io = new IntersectionObserver(([e]) => (inView = e.isIntersecting));
+		io.observe(pulsesEl);
+		return () => {
+			window.removeEventListener('load', start);
+			io.disconnect();
+		};
+	});
 </script>
 
+<!-- Three stacked layers, so each animation frame repaints only the thin pulses: the backdrop
+     never changes, the fibres "breathe" with opacity on their own <svg> (composited on the GPU),
+     and the pulses blend with what is underneath in one pass. -->
 <svg viewBox="0 0 1440 800" preserveAspectRatio="xMaxYMid slice" class="neon" aria-hidden="true">
 	<defs>
 		<radialGradient id="neon-bg" cx="0.78" cy="0.42" r="0.55">
 			<stop offset="0" stop-color="#0C67BA" stop-opacity="0.5" />
 			<stop offset="1" stop-color="#0C67BA" stop-opacity="0" />
 		</radialGradient>
+	</defs>
+	{#if !transparent}<rect width="1440" height="800" fill="#07090c" />{/if}
+	<rect width="1440" height="800" fill="url(#neon-bg)" />
+</svg>
+
+<!-- the fibres: wide faint halo, narrower halo, thin core, all fading along their length -->
+<svg viewBox="0 0 1440 800" preserveAspectRatio="xMaxYMid slice" class="neon fibres" aria-hidden="true">
+	<defs>
 		{#each fibres as f, i}
 			<linearGradient id={`neon-fibre-${i}`} gradientUnits="userSpaceOnUse" x1={f.from[0]} y1={f.from[1]} x2={f.to[0]} y2={f.to[1]}>
 				<stop offset="0" stop-color="#31A3E3" stop-opacity="0" />
@@ -55,6 +85,19 @@
 				<stop offset="1" stop-color="#5bb8ec" stop-opacity="0.2" />
 			</linearGradient>
 		{/each}
+	</defs>
+	<g fill="none" stroke-linecap="round">
+		{#each fibres as f, i}
+			<path d={f.d} stroke={`url(#neon-fibre-${i})`} stroke-width="20" stroke-opacity="0.05" />
+			<path d={f.d} stroke={`url(#neon-fibre-${i})`} stroke-width="6" stroke-opacity="0.13" />
+			<path d={f.d} stroke={`url(#neon-fibre-${i})`} stroke-width={f.width} stroke-opacity={f.core} />
+		{/each}
+	</g>
+</svg>
+
+<!-- the light pulses -->
+<svg viewBox="0 0 1440 800" preserveAspectRatio="xMaxYMid slice" class="neon pulses" class:live={loaded && inView} bind:this={pulsesEl} aria-hidden="true">
+	<defs>
 		<!-- comet body: transparent at the back, white at the tip (it points along +x) -->
 		<linearGradient id="neon-comet">
 			<stop offset="0" stop-color="#31A3E3" stop-opacity="0" />
@@ -74,19 +117,6 @@
 		</radialGradient>
 	</defs>
 
-	{#if !transparent}<rect width="1440" height="800" fill="#07090c" />{/if}
-	<rect width="1440" height="800" fill="url(#neon-bg)" />
-
-	<!-- the fibres: wide faint halo, narrower halo, thin core, all fading along their length -->
-	<g class="fibres" fill="none" stroke-linecap="round">
-		{#each fibres as f, i}
-			<path d={f.d} stroke={`url(#neon-fibre-${i})`} stroke-width="20" stroke-opacity="0.05" />
-			<path d={f.d} stroke={`url(#neon-fibre-${i})`} stroke-width="6" stroke-opacity="0.13" />
-			<path d={f.d} stroke={`url(#neon-fibre-${i})`} stroke-width={f.width} stroke-opacity={f.core} />
-		{/each}
-	</g>
-
-	<!-- the light pulses -->
 	{#each pulses as p, i}
 		{@const d = fibres[p.fibre].d}
 		<g class="pulse" style={`--dur:${p.dur}s; --delay:${p.delay}s; --path:path('${d}')`}>
@@ -113,18 +143,21 @@
 		animation: breathe 5s ease-in-out infinite alternate;
 	}
 	/* light adds to what is underneath */
-	.pulse {
+	.pulses {
 		mix-blend-mode: screen;
 	}
-	.tail,
-	.comet {
-		/* quick launch, long glide out: reads as speed */
+	/* quick launch, long glide out: reads as speed */
+	.live .tail,
+	.live .comet {
 		animation: var(--dur) cubic-bezier(0.3, 0.1, 0.2, 1) var(--delay) infinite;
 	}
+	/* until then the comets wait below the bottom edge, where the fibres start */
 	.tail {
 		stroke: #31a3e3;
 		stroke-dasharray: var(--len) 3000;
 		stroke-dashoffset: var(--from);
+	}
+	.live .tail {
 		animation-name: run;
 	}
 	/* the comet needs CSS motion path; without it only the tail runs */
@@ -136,6 +169,8 @@
 			display: inline;
 			offset-path: var(--path);
 			offset-rotate: auto;
+		}
+		.live .comet {
 			animation-name: ride;
 		}
 	}
