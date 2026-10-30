@@ -40,15 +40,33 @@
 		track.scrollTo({ left: Math.min(starts[target], max), behavior: 'smooth' });
 	}
 
+	// DJI behaviour: the row runs to both edges of the window, but scrolling starts with the first
+	// card on the content's left margin and ends with the last card on its right margin.
+	// The gap between window edge and content margin is measured here (CSS gives a close
+	// fallback before hydration).
+	let wrap;
+	let edges = $state('');
+	function measure() {
+		if (!wrap) return;
+		const box = wrap.parentElement.getBoundingClientRect();
+		const right = document.documentElement.clientWidth - box.right;
+		edges = `--edge-l: ${Math.round(box.left)}px; --edge-r: ${Math.round(right)}px`;
+	}
+
 	$effect(() => {
+		measure();
 		update();
-		const ro = new ResizeObserver(update);
+		const ro = new ResizeObserver(() => {
+			measure();
+			update();
+		});
 		ro.observe(track);
+		ro.observe(wrap.parentElement);
 		return () => ro.disconnect();
 	});
 </script>
 
-<div class="wrap" class:flat={!overhang}>
+<div class="wrap" class:flat={!overhang} bind:this={wrap} style={edges}>
 	<ul role="list" class="track" bind:this={track} onscroll={update}>
 		{#each cards as c}
 			<li class="card on-dark" class:has-cutout={c.cutout}>
@@ -90,9 +108,13 @@
 </div>
 
 <style>
+	/* full window width: the row reaches both edges of the screen; padding and scroll-padding
+	   put its start and end on the content margins (--edge-l / --edge-r, measured in the script) */
 	.wrap {
+		--edge-fallback: max(var(--gutter), (100vw - var(--container)) / 2);
 		position: relative;
 		--overhang: 80px;
+		margin-inline: calc(-1 * var(--edge-l, var(--edge-fallback))) calc(-1 * var(--edge-r, var(--edge-fallback)));
 	}
 	.wrap.flat {
 		--overhang: 0px;
@@ -100,10 +122,12 @@
 	.track {
 		display: grid;
 		grid-auto-flow: column;
-		/* three cards per view; the fourth peeks in */
-		grid-auto-columns: calc((100% - 2 * 16px) / 3.15);
+		/* three cards across the content width; the next one runs out to the window edge */
+		grid-auto-columns: calc((100% - 2 * 16px) / 3);
 		gap: 16px;
 		margin: 0;
+		padding-inline: var(--edge-l, var(--edge-fallback)) var(--edge-r, var(--edge-fallback));
+		scroll-padding-inline: var(--edge-l, var(--edge-fallback)) var(--edge-r, var(--edge-fallback));
 		/* room for the objects that overhang the cards */
 		padding-top: var(--overhang);
 		overflow-x: auto;
@@ -232,15 +256,16 @@
 	.arrow-btn:hover {
 		background: rgb(0 0 0 / 0.75);
 	}
+	/* centred on the content margins, over the cards that run out to the window edges */
 	.prev {
-		left: 8px;
+		left: max(8px, calc(var(--edge-l, var(--edge-fallback)) - 22px));
 	}
 	.next {
-		right: 8px;
+		right: max(8px, calc(var(--edge-r, var(--edge-fallback)) - 22px));
 	}
 	@media (max-width: 900px) {
 		.track {
-			grid-auto-columns: calc((100% - 16px) / 2.15);
+			grid-auto-columns: calc((100% - 16px) / 2);
 		}
 	}
 	@media (max-width: 600px) {

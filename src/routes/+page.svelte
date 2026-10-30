@@ -279,6 +279,8 @@
 	.store {
 		padding-block: var(--s-section);
 		background: #f0f1f3;
+		/* the Explore row runs to the window edges: never let it widen the page */
+		overflow-x: clip;
 	}
 	.store-head {
 		margin-bottom: var(--s-xl);
