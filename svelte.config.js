@@ -6,6 +6,8 @@ const config = {
 		// Static output: every page is prerendered to plain HTML and served from a CDN.
 		adapter: adapter({ fallback: '404.html' }),
 		appDir: 'app', // '_app' is reserved on some static hosts
+		// Tried inlining the CSS (inlineStyleThreshold): measured worse on the home (one longer
+		// parse-and-style task, higher TBT), so the CSS stays in separate cached files.
 		paths: {
 			// Sub-folder the site is served from: empty for the real site, '/remake-sdvoe' for the
 			// GitHub Pages preview (set by .github/workflows/pages.yml). A non-empty BASE_PATH also marks

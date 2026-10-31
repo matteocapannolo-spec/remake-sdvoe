@@ -297,6 +297,14 @@ a:hover .arrow::after {
 	clip: rect(0 0 0 0);
 	white-space: nowrap;
 }
+/* Long pages: sections below the fold are laid out and painted only when they near the screen
+   (their animations stay idle until then). The browser remembers each one's real height once
+   rendered; 720px is the placeholder before that. Not for sections whose scripts measure
+   themselves on load. */
+.defer-render {
+	content-visibility: auto;
+	contain-intrinsic-size: auto 720px;
+}
 
 /* ── Buttons: every action is a pill; one blue; secondary = 1px ink outline ── */
 .btn {

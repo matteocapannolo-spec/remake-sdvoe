@@ -10,6 +10,17 @@
 
 	// Hero backdrop photo (original in images-src/, converted by `npm run images -- --from images-src`)
 	const heroPhoto = localImg('hero-bg.jpg');
+	// Smaller copies (made from images-src/hero-bg.jpg) so phones don't download and decode the
+	// 2400px one. On a portrait screen the photo is cropped to the hero's height, so its width
+	// follows the height; it sits under a dark veil, so a slightly soft copy is fine there.
+	const heroSrcset = [
+		[localImg('hero-bg-800.jpg'), 800],
+		[localImg('hero-bg-1400.jpg'), 1400],
+		[heroPhoto, 2400]
+	]
+		.filter(([src]) => src)
+		.map(([src, w]) => `${src} ${w}w`)
+		.join(', ');
 	import { featuredCaseStudies, caseStudies } from '$lib/content/caseStudies.js';
 	import { href } from '$lib/link.js';
 
@@ -84,7 +95,7 @@
 	<div class="hero-art">
 		{#if heroPhoto}
 			<!-- the photo is light: a night-blue veil (denser behind the copy) keeps white text and the neon readable -->
-			<img class="hero-photo" src={heroPhoto} alt="" width="2000" height="1125" fetchpriority="high" />
+			<img class="hero-photo" src={heroPhoto} srcset={heroSrcset} sizes="(orientation: portrait) 90vh, 100vw" alt="" width="2400" height="1350" fetchpriority="high" decoding="async" />
 			<div class="hero-veil"></div>
 		{/if}
 		<NeonFiber transparent={!!heroPhoto} />
@@ -114,7 +125,8 @@
 </section>
 
 <!-- 4 · Ecosystem -->
-<section class="section">
+<!-- from here down, sections render only when they near the screen (.defer-render) -->
+<section class="section defer-render">
 	<div class="section-head">
 		<p class="eyebrow">Built by {memberCount} pro AV, IT and chip companies</p>
 	</div>
@@ -122,7 +134,7 @@
 </section>
 
 <!-- 5 · How it works -->
-<section class="container section">
+<section class="container section defer-render">
 	<div class="section-head">
 		<h2 class="t-h2">One network replaces the matrix.</h2>
 		<p class="t-lead">Transmitters turn HDMI, USB and control into network streams. An off-the-shelf 10G switch does the routing. Receivers scale, build walls and composite multiviews at the screen.</p>
@@ -132,7 +144,7 @@
 </section>
 
 <!-- 6 · Explore band: audience paths as white cards on fog -->
-<section class="explore section">
+<section class="explore section defer-render">
 	<div class="container">
 		<div class="section-head"><h2 class="t-h2">Start where you are.</h2></div>
 		<div class="grid grid-3">
@@ -151,7 +163,7 @@
 </section>
 
 <!-- 7 · Comparison: spec columns -->
-<section class="container section">
+<section class="container section defer-render">
 	<div class="section-head">
 		<h2 class="t-h2">SDVoE vs. an HDBaseT matrix.</h2>
 		<p class="t-lead">Same brief: switching, extension, a 2×2 video wall, a multiview display and KVM.</p>
@@ -176,7 +188,7 @@
 </section>
 
 <!-- 8 · Field cards: case studies -->
-<section class="section">
+<section class="section defer-render">
 	<div class="container section-head"><h2 class="t-h2">Running today, worldwide.</h2><p class="t-lead">{caseStudies.length} published case studies, from parliaments to theme parks.</p></div>
 	<div class="bleed tiles card-row">
 		{#each featuredCaseStudies as c}<CaseCard item={c} />{/each}
@@ -185,7 +197,7 @@
 </section>
 
 <!-- 9 · News cards -->
-<section class="container section">
+<section class="container section defer-render">
 	<div class="section-head"><h2 class="t-h2">Latest news.</h2></div>
 	<div class="grid grid-3 news">
 		{#each news.slice(0, 3) as n}
@@ -200,7 +212,7 @@
 </section>
 
 <!-- 10 · Feature-link band -->
-<section class="band">
+<section class="band defer-render">
 	<div class="container band-grid">
 		<a class="band-item" href={href('/products#finder')}>
 			<svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="9" width="22" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M9 14h4M9 18h8" stroke="currentColor" stroke-width="1.5" /></svg>

@@ -8,8 +8,10 @@
 	<div class="marquee" aria-label="SDVoE Alliance members">
 		<ul role="list" class="track">
 			{#each [...logos, ...logos] as [name, file], i}
+				<!-- plain <img>, not the Img component: the logos are local files, and 76 components
+				     with their own error state were a measurable part of the home's start-up work -->
 				<li class="tile" aria-hidden={i >= logos.length ? 'true' : undefined}>
-					<Img src={img(file)} alt={i < logos.length ? name : ''} loading="lazy" width="140" height="60" draggable="false">{#snippet fallback()}<span class="name">{name}</span>{/snippet}</Img>
+					<img src={img(file)} alt={i < logos.length ? name : ''} loading="lazy" width="140" height="60" draggable="false" />
 				</li>
 			{/each}
 		</ul>

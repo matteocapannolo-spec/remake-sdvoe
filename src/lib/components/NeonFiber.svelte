@@ -41,20 +41,31 @@
 	// --rest freezes the pulse part-way for reduced motion.
 	const offsets = (len, rest) => `--len:${len}; --from:${len}; --to:${len - 1000}; --rest:${len - rest}`;
 
-	// The pulses repaint on the main thread every frame, so they start only once the page has
-	// loaded and the browser is idle, and stop while the hero is off screen.
+	// The pulses repaint on the main thread every frame, so they keep out of the way while the
+	// page loads: they start at the visitor's first move (pointer, scroll, touch, key) or, failing
+	// that, a few seconds after load once the browser is idle. They stop while the hero is off screen.
 	let pulsesEl;
 	let loaded = $state(false);
 	let inView = $state(true);
 	$effect(() => {
+		const moves = ['pointermove', 'pointerdown', 'scroll', 'touchstart', 'keydown'];
 		const idle = window.requestIdleCallback ?? ((fn) => setTimeout(fn, 200));
-		const start = () => idle(() => (loaded = true), { timeout: 2000 });
-		if (document.readyState === 'complete') start();
-		else window.addEventListener('load', start, { once: true });
+		let timer;
+		const go = () => {
+			loaded = true;
+			clearTimeout(timer);
+			moves.forEach((m) => window.removeEventListener(m, go));
+		};
+		const later = () => (timer = setTimeout(() => idle(go, { timeout: 2000 }), 3500));
+		moves.forEach((m) => window.addEventListener(m, go, { once: true, passive: true }));
+		if (document.readyState === 'complete') later();
+		else window.addEventListener('load', later, { once: true });
 		const io = new IntersectionObserver(([e]) => (inView = e.isIntersecting));
 		io.observe(pulsesEl);
 		return () => {
-			window.removeEventListener('load', start);
+			clearTimeout(timer);
+			moves.forEach((m) => window.removeEventListener(m, go));
+			window.removeEventListener('load', later);
 			io.disconnect();
 		};
 	});
