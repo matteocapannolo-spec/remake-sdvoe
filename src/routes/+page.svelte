@@ -32,7 +32,7 @@
 			bg: 'radial-gradient(120% 70% at 50% 0%, #2c3540 0%, #0b0d10 70%)'
 		},
 		{
-			tier: 'The Power of 10',
+			tier: 'The Power of Ten+',
 			name: 'Uncompressed at 10G',
 			tagline: 'Matrix-switch quality and latency, on a standard network.',
 			fact: 'Under 100 µs',
@@ -90,7 +90,7 @@
 		<NeonFiber transparent={!!heroPhoto} />
 	</div>
 	<div class="hero-copy">
-		<p class="tier">The Power of 10</p>
+		<p class="tier">The Power of Ten+</p>
 		<h1 class="t-display">Matrix-grade video.<br />Ethernet freedom.</h1>
 		<p class="hero-sub">
 			Uncompressed 4K60 4:4:4 over standard 10G Ethernet, with under 100 µs of latency — and every certified product

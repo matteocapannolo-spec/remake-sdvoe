@@ -9,7 +9,7 @@
 	import { href } from '$lib/link.js';
 
 	const sections = [
-		{ id: 'power-of-10', label: 'Power of 10' },
+		{ id: 'power-of-10', label: 'Power of Ten+' },
 		{ id: 'how-it-works', label: 'How it works' },
 		{ id: 'beyond-the-matrix', label: 'Beyond the matrix' },
 		{ id: 'convergence', label: 'AV/IT convergence' },
@@ -18,13 +18,13 @@
 	];
 </script>
 
-<Seo title="Why SDVoE" description="The Power of 10: uncompressed, zero-latency AV over standard 10G Ethernet, with a full-stack platform and one open API." />
+<Seo title="Why SDVoE" description="The Power of Ten+: uncompressed, zero-latency AV over standard 10G Ethernet, with a full-stack platform and one open API." />
 
 <!--
   One page replaces five on the current site: Power of 10, The matrix transformed,
   A full stack solution, Benefits, AV/IT convergence (+ Sustainability shootout).
 -->
-<PageHero eyebrow="Why SDVoE" title="The Power of 10." lead="10 gigabits per second is enough to move video without compressing it. That one fact is why SDVoE matches a matrix switch on quality and latency — and beats it on everything else.">
+<PageHero eyebrow="Why SDVoE" title="The Power of Ten+" lead="10 gigabits per second is enough to move video without compressing it. That one fact is why SDVoE matches a matrix switch on quality and latency — and beats it on everything else.">
 	<a class="btn btn-primary" href={href('/technology/compare')}>Compare with HDBaseT and IPMX</a>
 	<a class="btn btn-outline" href={href('/technology/specifications')}>Specifications</a>
 </PageHero>
