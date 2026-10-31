@@ -10,7 +10,8 @@
 		MonitorCog, GraduationCap, BadgeCheck, Users, Info, Landmark, Building, Handshake, Newspaper
 	} from '@lucide/svelte';
 
-	// Icon keys used by the menu in site.js (Lucide, ISC licence)
+	// Icon keys used by the menu in site.js (Lucide, ISC licence); `rainbow: true` on an item gives
+	// its icon the Power of 10+ colours on hover
 	const icons = {
 		zap: Zap, workflow: Workflow, compare: GitCompareArrows, specs: ListChecks, code: Braces, grid: LayoutGrid,
 		factory: Factory, book: BookOpenText, search: Search, library: Library, orchestrator: MonitorCog,
@@ -114,7 +115,7 @@
 						{#each item.children as c}
 							<li>
 								<a href={href(c.href)} target={isExternal(c.href) ? '_blank' : undefined} rel={isExternal(c.href) ? 'noopener' : undefined}>
-									{#if icons[c.icon]}{@const Icon = icons[c.icon]}<span class="m-icon" aria-hidden="true"><Icon size={20} strokeWidth={1.5} /></span>{/if}
+									{#if icons[c.icon]}{@const Icon = icons[c.icon]}<span class="m-icon" class:rainbow={c.rainbow} aria-hidden="true"><Icon size={20} strokeWidth={1.5} /></span>{/if}
 									<span class="m-label">{c.label}{#if c.external}<span aria-hidden="true"> ↗</span>{/if}</span>
 									<span class="m-desc">{c.desc}</span>
 								</a>
@@ -328,6 +329,56 @@
 	.mega-list a:hover .m-icon {
 		background: var(--primary);
 		color: #fff;
+	}
+	/* "Power of 10+" item (rainbow: true in site.js): on hover the tile fills with the ten colours
+	   of the Power of 10+ wheel, flowing sideways as flat bands. The colours are the
+	   wheel's own, used only here (the "no orange" rule covers the UI, not this mark). */
+	.m-icon.rainbow {
+		position: relative;
+		overflow: hidden;
+		isolation: isolate;
+	}
+	.m-icon.rainbow::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		/* flat bands, one per wheel colour (10px each), so every colour stays distinct */
+		background: linear-gradient(
+				90deg,
+				#d7282f 0 10%,
+				#ee5a3a 0 20%,
+				#f7941d 0 30%,
+				#e2c51e 0 40%,
+				#8cc63f 0 50%,
+				#2dbda8 0 60%,
+				#10adcf 0 70%,
+				#0b7f94 0 80%,
+				#7e4a8d 0 90%,
+				#b91d7f 0
+			)
+			0 0 / 100px 100% repeat-x;
+		opacity: 0;
+		transition: opacity 0.25s ease;
+		/* the 40px tile shows four bands at a time; the whole wheel passes in 2.5s */
+		animation: power-flow 2.5s linear infinite paused;
+	}
+	.mega-list a:hover .m-icon.rainbow {
+		background: transparent;
+	}
+	.mega-list a:hover .m-icon.rainbow::before {
+		opacity: 1;
+		animation-play-state: running;
+	}
+	@keyframes power-flow {
+		to {
+			background-position: 100px 0;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.m-icon.rainbow::before {
+			animation: none;
+		}
 	}
 	.m-label {
 		grid-column: 2;

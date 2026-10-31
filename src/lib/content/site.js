@@ -54,7 +54,7 @@ export const nav = [
 		label: 'Technology',
 		href: '/technology',
 		children: [
-			{ label: 'Why SDVoE', href: '/technology', desc: 'The Power of Ten+ in one page', icon: 'zap' },
+			{ label: 'Why SDVoE', href: '/technology', desc: 'Unleash the Power of 10+', icon: 'zap', rainbow: true },
 			{ label: 'How it works', href: '/technology#how-it-works', desc: 'From source to screen over 10G', icon: 'workflow' },
 			{ label: 'Compare', href: '/technology/compare', desc: 'SDVoE vs. HDBaseT and IPMX', icon: 'compare' },
 			{ label: 'Specifications', href: '/technology/specifications', desc: 'Performance and features', icon: 'specs' },
