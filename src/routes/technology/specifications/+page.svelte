@@ -13,7 +13,7 @@
 
 <Seo title="Specifications" description="SDVoE performance and feature specifications: under 100 µs latency, uncompressed 4K60 4:4:4, multichannel audio, RS-232, IR, embedded 1G Ethernet." />
 
-<PageHero eyebrow="Specifications" title="The numbers behind the platform." lead="One latency figure, stated the same way everywhere: under 100 microseconds end to end — less than 1/150th of a video frame." />
+<PageHero eyebrow="Specifications" title="The numbers behind the platform" lead="One latency figure, stated the same way everywhere: under 100 microseconds end to end — less than 1/150th of a video frame." />
 
 <section class="container">
 	<div class="grid grid-3">
@@ -35,7 +35,7 @@
 
 <section class="container section">
 	<div class="card-inverse interop">
-		<h2 class="t-h3">Interoperable by design.</h2>
+		<h2 class="t-h3">Interoperable by design</h2>
 		<p style="color: var(--inverse-text-faint)">{specs.interop}</p>
 		<div class="btn-row">
 			<a class="btn btn-inverse" href={href('/products#finder')}>Browse certified products</a>

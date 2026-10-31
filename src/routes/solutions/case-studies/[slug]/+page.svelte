@@ -79,7 +79,7 @@
 
 {#if data.related.length}
 	<section class="section">
-		<div class="container section-head"><h2 class="t-h3">More in {item.sector}.</h2></div>
+		<div class="container section-head"><h2 class="t-h3">More in {item.sector}</h2></div>
 		<div class="bleed tiles card-row">
 			{#each data.related as c (c.slug)}<CaseCard item={c} />{/each}
 		</div>

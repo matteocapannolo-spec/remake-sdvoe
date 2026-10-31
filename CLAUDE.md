@@ -45,6 +45,8 @@ Deep Blue `#0C67BA` per tutte le azioni, Sky Blue `#31A3E3` solo su fondi scuri,
 ## Regole sui contenuti
 
 - Latenza: scrivere sempre "under 100 µs (under 1/150th of a frame)". Mai "zero-millisecond" o "sub-microsecond".
+- Titoli (h1–h6, titoli di card e di hero) senza punto finale. Un punto interno fra due frasi resta ("Matrix-grade video. Ethernet freedom").
+- Campagna: sempre "Power of 10+" (cifre, con il +). Mai "Power of Ten", "Power of Ten+" o "Power of 10" senza +.
 - Numero membri: calcolato da `members` in site.js (fonte: pagina Members, confermata come la più aggiornata).
 - Steering member: Broadata, Christie, IDK, NETGEAR, Semtech. Fondatori: Christie, NETGEAR, Semtech.
 - `VERIFY` nel codice = dato da confermare con l'alleanza; `REVIEW: former member` = contenuti di ex membri (Black Box, ZeeVee), restano finché non si decide (PROGETTO.md §5 punto 10).

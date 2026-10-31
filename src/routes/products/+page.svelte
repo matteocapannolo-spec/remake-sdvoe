@@ -35,7 +35,7 @@
 
 <Seo title="Products" description="Find SDVoE Certified Interoperable products: transmitters, receivers and transceivers from multiple manufacturers." />
 
-<PageHero eyebrow="Products" title="Mix brands. Keep the picture." lead="Every SDVoE product shares the same chip and API, so devices from different manufacturers work together. Certified products have been tested to prove it.">
+<PageHero eyebrow="Products" title="Mix brands. Keep the picture" lead="Every SDVoE product shares the same chip and API, so devices from different manufacturers work together. Certified products have been tested to prove it.">
 	<a class="btn btn-primary" href="#finder">Product finder</a>
 	<a class="btn btn-outline" href={CATALOG} target="_blank" rel="noopener">Full member catalog ↗</a>
 </PageHero>
@@ -43,7 +43,7 @@
 <section id="finder" class="container section">
 	<div class="finder-head">
 		<div>
-			<h2 class="t-h2">Certified interoperable products.</h2>
+			<h2 class="t-h2">Certified interoperable products</h2>
 			<p class="t-body t-muted" aria-live="polite">{results.length} of {certifiedProducts.length} products</p>
 		</div>
 		<span class="tier">SDVoE Certified Interoperable</span>
@@ -117,13 +117,13 @@
 	<div class="grid grid-2">
 		<div class="card-inverse orch">
 			<span class="pill pill-accent">Free</span>
-			<h2 class="t-h3">SDVoE Orchestrator.</h2>
+			<h2 class="t-h3">SDVoE Orchestrator</h2>
 			<p style="color: var(--inverse-text-faint)">Free software to manage, route, configure and monitor SDVoE networks — across brands.</p>
 			<a class="btn btn-inverse" href="https://sdvoe.org/contact/">Request Orchestrator</a>
 		</div>
 		<div class="card-soft orch">
 			<span class="pill">New in 2026</span>
-			<h2 class="t-h3">An API ready for AI agents.</h2>
+			<h2 class="t-h3">An API ready for AI agents</h2>
 			<p class="t-muted">The SDVoE API now supports agentic, AI-assisted workflows: natural-language control, faster deployment and quicker troubleshooting.</p>
 			<a class="btn btn-outline" href={href('/developers#ai')}>Developers & API</a>
 		</div>

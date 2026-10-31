@@ -36,14 +36,14 @@
 <Seo title="Learn" description="Free SDVoE Academy courses on video, networking and system design, plus Design Partner, Design House and product interoperability certifications." />
 
 <!-- Academy + three certification pages + partner directories, in one place. -->
-<PageHero eyebrow="SDVoE Academy" title="Learn AV over IP. Free." lead="Self-paced lessons on video and networking basics, system design and sales — whether you design, integrate, install, sell or manage pro AV systems.">
+<PageHero eyebrow="SDVoE Academy" title="Learn AV over IP. Free" lead="Self-paced lessons on video and networking basics, system design and sales — whether you design, integrate, install, sell or manage pro AV systems.">
 	<a class="btn btn-primary" href={ACADEMY}>Start learning ↗</a>
 	<a class="btn btn-outline" href="#certifications">Get certified</a>
 </PageHero>
 
 <section class="container section">
 	<div class="head-row">
-		<h2 class="t-h3">New courses.</h2>
+		<h2 class="t-h3">New courses</h2>
 		<a class="btn btn-soft btn-sm" href={ACADEMY}>All courses ↗</a>
 	</div>
 	<div class="grid grid-3" style="margin-top: var(--s-lg)">
@@ -59,7 +59,7 @@
 
 <section id="certifications" class="container section">
 	<div class="section-head">
-		<h2 class="t-h2">Three certifications. One page.</h2>
+		<h2 class="t-h2">Three certifications. One page</h2>
 		<p class="t-lead">For people, for companies, and for products.</p>
 	</div>
 	<div class="grid grid-3">
@@ -85,7 +85,7 @@
 	<div class="card-inverse partners on-dark">
 		<div>
 			<p class="tier">SDVoE Certified Design Partners</p>
-			<h2 class="t-h2">{designPartners.count.toLocaleString('en-US')} certified designers worldwide.</h2>
+			<h2 class="t-h2">{designPartners.count.toLocaleString('en-US')} certified designers worldwide</h2>
 			<p style="color: var(--inverse-text-faint)">AV designers and consultants at more than {designPartners.companies.toLocaleString('en-US')} companies have completed SDVoE Design Partner certification. Ask your integrator or consultant for theirs.</p>
 		</div>
 		<div class="partner-actions">

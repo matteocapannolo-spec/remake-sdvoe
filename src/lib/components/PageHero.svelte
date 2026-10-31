@@ -1,10 +1,12 @@
 <script>
 	// DJI category-page header: grey eyebrow, 48px+ title, centred, actions as pills.
-	let { eyebrow = '', title, lead = '', children } = $props();
+	// mark: optional logo between the eyebrow and the title (Technology: the Power of 10+ campaign mark).
+	let { eyebrow = '', title, lead = '', mark, children } = $props();
 </script>
 
 <section class="hero container">
 	{#if eyebrow}<p class="eyebrow">{eyebrow}</p>{/if}
+	{#if mark}{@render mark()}{/if}
 	<h1 class="t-h1">{title}</h1>
 	{#if lead}<p class="t-lead">{lead}</p>{/if}
 	{#if children}<div class="btn-row">{@render children()}</div>{/if}

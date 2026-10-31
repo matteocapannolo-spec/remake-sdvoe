@@ -19,7 +19,7 @@ Il nuovo sito deve:
 
 | Voce | Contenuto | Pagine attuali che sostituisce |
 |---|---|---|
-| **Technology** | Why SDVoE (Power of 10, come funziona, oltre la matrice, convergenza, sostenibilità, benefici) · Compare · Specifications · Developers & API | Power of 10, The matrix transformed, A full stack solution, Benefits, AV/IT convergence, Sustainability shootout, SDVoE vs HDBaseT, SDVoE vs IPMX, Specifications |
+| **Technology** | Why SDVoE (Power of 10+, come funziona, oltre la matrice, convergenza, sostenibilità, benefici) · Compare · Specifications · Developers & API | Power of 10, The matrix transformed, A full stack solution, Benefits, AV/IT convergence, Sustainability shootout, SDVoE vs HDBaseT, SDVoE vs IPMX, Specifications |
 | **Solutions** | Per applicazione · per settore · tutti i 38 casi studio, filtrabili, ognuno con la sua pagina | Use cases (5 pagine), Case studies |
 | **Products** | Ricerca prodotti certificati · catalogo AV-iQ · Orchestrator · API per l'AI | Products, Member products, Certified products |
 | **Learn** | Academy · tre certificazioni · elenco dei partner | Academy, 4 voci di certificazione, Design Partners, Design Houses |
@@ -30,7 +30,7 @@ Pulsante fisso nella barra di navigazione: **Find products**. Pulsante secondari
 ### Ordine della homepage
 
 1. Hero scura con la promessa ("Matrix-grade video. Ethernet freedom.") e due pulsanti
-2. Quattro card in stile "What's Hot" dello store DJI: prodotti certificati, Power of 10, Academy, adesione
+2. Quattro card in stile "What's Hot" dello store DJI: prodotti certificati, Power of 10+, Academy, adesione
 3. Griglia "Why SDVoE" in stile bento (come "Why shop with DJI Store"): latenza, 4K60 4:4:4, switch 10G, prodotti, video wall, InstaSwitch, membri
 4. Loghi dei membri che scorrono
 5. Schema "come funziona" (sorgente → TX → switch 10G → RX → display)
@@ -166,6 +166,11 @@ Aggiornato il 30 ottobre 2026. Nel codice i punti ancora aperti sono segnati com
     - monitor della stessa scheda: illustrazione fornita come `blank-screen-computer-icon-isolated-white-background.zip` (file 47727, probabilmente da Freepik): se è la licenza gratuita di Freepik serve l'attribuzione all'autore, oppure un abbonamento;
     - loghi di Claude, OpenAI e Gemini (Lobe Icons, MIT): marchi di terzi, uso da far confermare all'alleanza o a DVIGear;
     - foto fornite per gli sfondi (Explore, hero, sezione AI, ledwall): verificare la fonte e la licenza di ciascuna.
+18. **Pagine Contact, Privacy policy e Thank you (31 ottobre).** Testi presi da sdvoe.org (`/contact/`, `/privacypolicy/`, `/thank-you/`) e impaginati nella nuova UI; `/privacypolicy/` ora reindirizza a `/privacy-policy/`. Da verificare:
+    - il modulo di `/contact/` invia direttamente allo Zoho Bigin dell'alleanza, con campi, opzioni e token copiati dal modulo attuale (`src/lib/content/contact.js`). Non è stato provato con un invio reale: farlo fare all'alleanza dopo il lancio, e confermare che il token non sia cambiato;
+    - dopo l'invio Bigin rimanda a `https://sdvoe.org/thank-you/`, che nel nuovo sito esiste (noindex, fuori dalla sitemap);
+    - la privacy policy è quella del 1° marzo 2019 e cita ancora Privacy Shield e Google+: aggiornarla è compito dell'alleanza (legale);
+    - il campo newsletter nella scheda "Stay connected" della pagina Contact, come quello del footer, non è collegato a nessun servizio.
 
 ### Fonti per IPMX ed eventi
 - AIMS: prime 48 certificazioni IPMX, ISE 2026 (ibc.org, ravepubs.com)

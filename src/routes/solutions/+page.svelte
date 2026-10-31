@@ -21,13 +21,13 @@
 
 <Seo title="Solutions" description="SDVoE for matrix switching, KVM, video walls and multiviewers, across control rooms, education, government, medical, live production and more." />
 
-<PageHero eyebrow="Solutions" title="Any source. Any screen. Any scale." lead="Matrix switches, KVM, video walls and multiviewers become software running on the same network — for whatever your sector demands." />
+<PageHero eyebrow="Solutions" title="Any source. Any screen. Any scale" lead="Matrix switches, KVM, video walls and multiviewers become software running on the same network — for whatever your sector demands." />
 
 <SubNav items={[{ id: 'applications', label: 'By application' }, { id: 'sectors', label: 'By sector' }, { id: 'case-studies', label: 'Case studies' }]} />
 
 <section id="applications" class="container section">
 	<div class="section-head">
-		<h2 class="t-h2">By application.</h2>
+		<h2 class="t-h2">By application</h2>
 		<p class="t-lead">For designers: what each traditional box becomes on SDVoE.</p>
 	</div>
 	<div class="grid grid-2">
@@ -43,7 +43,7 @@
 
 <section id="sectors" class="container section">
 	<div class="section-head">
-		<h2 class="t-h2">By sector.</h2>
+		<h2 class="t-h2">By sector</h2>
 		<p class="t-lead">For owners and IT: where zero latency and one network pay off.</p>
 	</div>
 	<div class="grid grid-4">
@@ -61,7 +61,7 @@
 
 <section id="case-studies" class="container section">
 	<div class="section-head">
-		<h2 class="t-h2">Case studies.</h2>
+		<h2 class="t-h2">Case studies</h2>
 		<p class="t-lead">{caseStudies.length} installations worldwide. Filter by sector.</p>
 	</div>
 	<div class="filters toggles" role="group" aria-label="Filter by sector">

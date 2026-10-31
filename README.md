@@ -31,7 +31,7 @@ Ogni push su `main` pubblica un'anteprima su https://matteocapannolo-spec.github
 |---|---|
 | Board of directors | `src/lib/content/board.js` (legge `generated/board.json`, generato da `npm run import`) |
 | Casi studio | `src/lib/content/caseStudies.js` (indice: titolo, settore, sintesi, membro) e `src/lib/content/generated/case-studies.json` (testi completi, generato da `npm run import`; letto solo lato server da `src/lib/server/caseStudyStories.js`, così non finisce nel JS delle altre pagine) |
-| Testi, elenchi, numeri | `src/lib/content/*.js`. `site.js` contiene menu, numeri chiave, membri, casi studio, news ed eventi. `technology.js` contiene Power of 10, livelli, confronti e specifiche. `solutions.js` applicazioni e settori. `products.js` i prodotti certificati |
+| Testi, elenchi, numeri | `src/lib/content/*.js`. `site.js` contiene menu, numeri chiave, membri, casi studio, news ed eventi. `technology.js` contiene Power of 10+, livelli, confronti e specifiche. `solutions.js` applicazioni e settori. `products.js` i prodotti certificati |
 | Colori, font, spaziature, raggi | `src/lib/styles/tokens.css` (token del design system) |
 | Stili comuni (pulsanti, card, linguette, tabelle, FAQ) | `src/lib/styles/global.css` |
 | Componenti | `src/lib/components/` |

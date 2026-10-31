@@ -13,10 +13,14 @@ const slugs = {
 	'/alliance/board/[slug]/': board.map((p) => p.slug)
 };
 
+// Pages kept out of search engines (they carry noindex)
+const hidden = ['/thank-you/'];
+
 const pages = Object.keys(import.meta.glob('/src/routes/**/+page.svelte'))
 	.map((p) => p.replace('/src/routes', '').replace('/+page.svelte', '') + '/')
 	.map((p) => p.replace(/\/+/g, '/'))
 	.flatMap((p) => (p.includes('[slug]') ? (slugs[p] ?? []).map((s) => p.replace('[slug]', s)) : [p]))
+	.filter((p) => !hidden.includes(p))
 	.sort();
 
 export function GET() {

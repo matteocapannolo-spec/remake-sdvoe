@@ -36,7 +36,7 @@
 	};
 
 	const sections = [
-		{ id: 'power-of-10', label: 'Power of Ten+' },
+		{ id: 'power-of-10', label: 'Power of 10+' },
 		{ id: 'how-it-works', label: 'How it works' },
 		{ id: 'beyond-the-matrix', label: 'Beyond the matrix' },
 		{ id: 'convergence', label: 'AV/IT convergence' },
@@ -45,26 +45,30 @@
 	];
 </script>
 
-<Seo title="Why SDVoE" description="The Power of Ten+: uncompressed, zero-latency AV over standard 10G Ethernet, with a full-stack platform and one open API." />
+<Seo title="Why SDVoE" description="The Power of 10+: uncompressed, zero-latency AV over standard 10G Ethernet, with a full-stack platform and one open API." />
 
 <!--
   One page replaces five on the current site: Power of 10, The matrix transformed,
   A full stack solution, Benefits, AV/IT convergence (+ Sustainability shootout).
 -->
-<PageHero eyebrow="Why SDVoE" title="The Power of Ten+" lead="10 gigabits per second is enough to move video without compressing it. That one fact is why SDVoE matches a matrix switch on quality and latency — and beats it on everything else.">
-	<a class="btn btn-primary" href={href('/technology/compare')}>Compare with HDBaseT and IPMX</a>
-	<a class="btn btn-outline" href={href('/technology/specifications')}>Specifications</a>
-</PageHero>
-
 <SubNav items={sections} />
 
-<section id="power-of-10" class="container section">
-	<div class="section-head">
+{#snippet actions()}
+	<a class="btn btn-primary" href={href('/technology/compare')}>Compare with HDBaseT and IPMX</a>
+	<a class="btn btn-outline" href={href('/technology/specifications')}>Specifications</a>
+{/snippet}
+
+<PageHero eyebrow="Why SDVoE" title="10 + 1 Reasons, one Ecosystem" lead="Ten core capabilities plus bonus bandwidth, shared by every certified product across an alliance of interoperable manufacturers.">
+	{#snippet mark()}
 		<!-- campaign mark, from sdvoe.org (images-src/sdvoe-alliance-introduces-the-power-of-10.jpg, trimmed) -->
-		<img class="p10-logo" src={img('power-of-10-logo.jpg')} alt="The Power of 10+" width="560" height="415" loading="lazy" />
-		<h2 class="t-h2">10 + 1 Reasons, one Ecosystem.</h2>
-		<p class="t-lead">Ten core capabilities plus bonus bandwidth, shared by every certified product across an alliance of interoperable manufacturers.</p>
-	</div>
+		<img class="p10-logo" src={img('power-of-10-logo.jpg')} alt="The Power of 10+" width="560" height="415" fetchpriority="high" />
+	{/snippet}
+	{@render actions()}
+</PageHero>
+
+<section id="power-of-10" class="container section" aria-labelledby="p10-title">
+	<!-- the visible title is the page h1 above; this keeps the card titles (h3) under an h2 -->
+	<h2 id="p10-title" class="visually-hidden">The Power of 10+ reasons</h2>
 	<ol role="list" class="grid grid-3 p10">
 		{#each powerOf10 as b, i}
 			<li class="card" style={hue(b.title)}>
@@ -82,7 +86,7 @@
 
 <section id="how-it-works" class="container section">
 	<div class="section-head">
-		<h2 class="t-h2">A full stack, not a piece of one.</h2>
+		<h2 class="t-h2">A full stack, not a piece of one</h2>
 		<p class="t-lead">Other technologies solve one layer — moving bits, or fixing timing. SDVoE specifies every layer of the OSI model, from the cable to the API.</p>
 	</div>
 	<HowItWorks />
@@ -97,12 +101,14 @@
 			</li>
 		{/each}
 	</ol>
+	<!-- the hero's actions again, for readers who got this far -->
+	<div class="btn-row stack-actions">{@render actions()}</div>
 </section>
 
 <section id="beyond-the-matrix" class="container section">
 	<div class="two">
 		<div class="stack-text">
-			<h2 class="t-h2">We still need matrix switching. We no longer need the matrix switch.</h2>
+			<h2 class="t-h2">We still need matrix switching. We no longer need the matrix switch</h2>
 			<p class="t-body">
 				A matrix switch is the big, expensive box at the center of most AV systems. Matrix switching is what users
 				actually need: getting any source to any screen without harming the signal. Matrix switches exist because
@@ -134,7 +140,7 @@
 	<div class="card-inverse conv">
 		<div>
 			<p class="t-caption" style="color: var(--inverse-text-faint)">AV/IT convergence</p>
-			<h2 class="t-h2">Only at 10G.</h2>
+			<h2 class="t-h2">Only at 10G</h2>
 		</div>
 		<div class="conv-cols">
 			<div>
@@ -152,7 +158,7 @@
 <section id="sustainability" class="container section">
 	<div class="two">
 		<div class="stack-text">
-			<h2 class="t-h2">Better image, less power.</h2>
+			<h2 class="t-h2">Better image, less power</h2>
 			<p class="t-body">
 				The BlueRiver ASIC at the heart of SDVoE draws about 2 W. An ASIC can use more than 80% less power than an FPGA
 				doing the same job. In the Alliance's side-by-side shootout against popular 1G systems, SDVoE delivered the
@@ -170,7 +176,7 @@
 
 <section id="benefits" class="container section">
 	<div class="section-head">
-		<h2 class="t-h2">What standard IT brings to AV.</h2>
+		<h2 class="t-h2">What standard IT brings to AV</h2>
 	</div>
 	<div class="grid grid-3">
 		{#each benefits as b}
@@ -190,7 +196,11 @@
 	.p10-logo {
 		width: min(200px, 55%);
 		height: auto;
-		margin: 0 auto var(--s-lg);
+		margin: var(--s-md) auto var(--s-lg);
+	}
+	.stack-actions {
+		justify-content: center;
+		margin-top: var(--s-xxl);
 	}
 	.p10 {
 		margin: 0;

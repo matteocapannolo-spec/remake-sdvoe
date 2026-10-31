@@ -11,7 +11,7 @@
 
 <Seo title="News & events" description="SDVoE Alliance press releases, member news, blog posts and upcoming trade shows." />
 
-<PageHero eyebrow="Newsroom" title="News & events." lead="Alliance announcements, member news and articles in one place." />
+<PageHero eyebrow="Newsroom" title="News & events" lead="Alliance announcements, member news and articles in one place." />
 
 <section id="events" class="container">
 	<div class="grid grid-2">

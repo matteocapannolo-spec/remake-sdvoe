@@ -43,7 +43,7 @@
 			bg: 'radial-gradient(120% 70% at 50% 0%, #2c3540 0%, #0b0d10 70%)'
 		},
 		{
-			tier: 'The Power of Ten+',
+			tier: 'The Power of 10+',
 			name: 'Uncompressed at 10G',
 			tagline: 'Matrix-switch quality and latency, on a standard network.',
 			fact: 'Under 100 µs',
@@ -101,8 +101,8 @@
 		<NeonFiber transparent={!!heroPhoto} />
 	</div>
 	<div class="hero-copy">
-		<p class="tier">The Power of Ten+</p>
-		<h1 class="t-display">Matrix-grade video.<br />Ethernet freedom.</h1>
+		<p class="tier">The Power of 10+</p>
+		<h1 class="t-display">Matrix-grade video.<br />Ethernet freedom</h1>
 		<p class="hero-sub">
 			Uncompressed 4K60 4:4:4 over standard 10G Ethernet, with under 100 µs of latency — and every certified product
 			works with every other.
@@ -136,7 +136,7 @@
 <!-- 5 · How it works -->
 <section class="container section defer-render">
 	<div class="section-head">
-		<h2 class="t-h2">One network replaces the matrix.</h2>
+		<h2 class="t-h2">One network replaces the matrix</h2>
 		<p class="t-lead">Transmitters turn HDMI, USB and control into network streams. An off-the-shelf 10G switch does the routing. Receivers scale, build walls and composite multiviews at the screen.</p>
 	</div>
 	<HowItWorks />
@@ -146,7 +146,7 @@
 <!-- 6 · Explore band: audience paths as white cards on fog -->
 <section class="explore section defer-render">
 	<div class="container">
-		<div class="section-head"><h2 class="t-h2">Start where you are.</h2></div>
+		<div class="section-head"><h2 class="t-h2">Start where you are</h2></div>
 		<div class="grid grid-3">
 			{#each audiences as a}
 				<article class="explore-card">
@@ -165,7 +165,7 @@
 <!-- 7 · Comparison: spec columns -->
 <section class="container section defer-render">
 	<div class="section-head">
-		<h2 class="t-h2">SDVoE vs. an HDBaseT matrix.</h2>
+		<h2 class="t-h2">SDVoE vs. an HDBaseT matrix</h2>
 		<p class="t-lead">Same brief: switching, extension, a 2×2 video wall, a multiview display and KVM.</p>
 	</div>
 	<div class="cmp">
@@ -189,7 +189,7 @@
 
 <!-- 8 · Field cards: case studies -->
 <section class="section defer-render">
-	<div class="container section-head"><h2 class="t-h2">Running today, worldwide.</h2><p class="t-lead">{caseStudies.length} published case studies, from parliaments to theme parks.</p></div>
+	<div class="container section-head"><h2 class="t-h2">Running today, worldwide</h2><p class="t-lead">{caseStudies.length} published case studies, from parliaments to theme parks.</p></div>
 	<div class="bleed tiles card-row">
 		{#each featuredCaseStudies as c}<CaseCard item={c} />{/each}
 	</div>
@@ -198,7 +198,7 @@
 
 <!-- 9 · News cards -->
 <section class="container section defer-render">
-	<div class="section-head"><h2 class="t-h2">Latest news.</h2></div>
+	<div class="section-head"><h2 class="t-h2">Latest news</h2></div>
 	<div class="grid grid-3 news">
 		{#each news.slice(0, 3) as n}
 			<a class="news-card" href={n.href} target="_blank" rel="noopener">

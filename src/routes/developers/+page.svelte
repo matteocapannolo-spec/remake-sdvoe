@@ -22,7 +22,7 @@
 
 <Seo title="Developers & API" description="One open API across every SDVoE product. Build switching, video walls, KVM and control apps — now with AI-assisted, agentic workflows through MCP servers." />
 
-<PageHero eyebrow="Developers & API" title="One API. Every SDVoE product." lead="The SDVoE API is the same on every device, from every manufacturer. Write your application once and it controls the whole ecosystem — and now AI agents can drive it too.">
+<PageHero eyebrow="Developers & API" title="One API. Every SDVoE product" lead="The SDVoE API is the same on every device, from every manufacturer. Write your application once and it controls the whole ecosystem — and now AI agents can drive it too.">
 	<a class="btn btn-primary" href="https://sdvoe.org/contact/">Request API access</a>
 	<a class="btn btn-outline" href="#ai">AI-assisted workflows</a>
 </PageHero>
@@ -39,7 +39,7 @@ verify   wall=left  → 2 windows, 0 ms switch</code></pre>
 			<p class="code-note">Illustrative pseudocode, not actual API syntax.</p>
 		</div>
 		<div class="why">
-			<h2 class="t-h3">Why build on SDVoE.</h2>
+			<h2 class="t-h3">Why build on SDVoE</h2>
 			<ul role="list">
 				<li><strong>Interoperable by design.</strong> The API, clock resynchronization and session management are identical across vendors, so your software works with any certified device.</li>
 				<li><strong>The hardware does the heavy lifting.</strong> Scaling, compositing and frame-rate conversion happen in the endpoints; your code just describes the result.</li>
@@ -52,7 +52,7 @@ verify   wall=left  → 2 windows, 0 ms switch</code></pre>
 
 <section class="container section">
 	<div class="section-head">
-		<h2 class="t-h2">What you can build.</h2>
+		<h2 class="t-h2">What you can build</h2>
 		<p class="t-lead">Matrix switches, video wall processors and multiviewers used to be boxes. On SDVoE they are applications.</p>
 	</div>
 	<div class="grid grid-3">
@@ -70,7 +70,7 @@ verify   wall=left  → 2 windows, 0 ms switch</code></pre>
 	<div class="container">
 		<div class="section-head">
 			<p class="tier">New in 2026</p>
-			<h2 class="t-h2">Ready for AI agents.</h2>
+			<h2 class="t-h2">Ready for AI agents</h2>
 			<p class="t-lead">The SDVoE API now supports agentic, AI-assisted workflows. Combined with MCP servers and Agent Skills, systems can be designed, deployed, monitored and fixed through natural-language prompts and automated tools.</p>
 		</div>
 		<div class="grid ai-cards">
@@ -103,7 +103,7 @@ verify   wall=left  → 2 windows, 0 ms switch</code></pre>
 </section>
 
 <section class="container section">
-	<div class="section-head"><h2 class="t-h2">Tools and resources.</h2></div>
+	<div class="section-head"><h2 class="t-h2">Tools and resources</h2></div>
 	<div class="grid grid-3">
 		<div class="option selected tool">
 			<span class="option-badge">Free</span>

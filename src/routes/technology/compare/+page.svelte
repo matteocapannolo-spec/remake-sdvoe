@@ -14,7 +14,7 @@
 <Seo title="SDVoE vs. HDBaseT and IPMX" description="Side-by-side comparison of SDVoE with HDBaseT matrix designs and with IPMX." />
 
 <!-- Two comparison pages merged into one, switched with a segmented control. -->
-<PageHero eyebrow="Compare" title="SDVoE, side by side." lead="How SDVoE stacks up against the two technologies designers ask about most." />
+<PageHero eyebrow="Compare" title="SDVoE, side by side" lead="How SDVoE stacks up against the two technologies designers ask about most." />
 
 <div class="container">
 	<div class="tabs" role="tablist" aria-label="Compare with">
@@ -46,7 +46,7 @@
 
 		{#if tab === 'hdbaset'}
 			<div class="section-head" style="margin-top: var(--s-section)">
-				<h2 class="t-h2">Half the devices for the same brief.</h2>
+				<h2 class="t-h2">Half the devices for the same brief</h2>
 				<p class="t-lead">{hdbaset.example.text}</p>
 			</div>
 			<div class="grid grid-2">

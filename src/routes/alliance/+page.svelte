@@ -51,7 +51,7 @@
 
 <section id="mission" class="container section">
 	<div class="mission">
-		<h2 class="t-h2">What we're here to do.</h2>
+		<h2 class="t-h2">What we're here to do</h2>
 		<ol role="list" class="goals">
 			{#each goals as g, i}
 				<li><span class="num">{String(i + 1).padStart(2, '0')}</span><span class="t-body">{g}</span></li>
@@ -75,7 +75,7 @@
 
 <section id="members" class="container section">
 	<div class="section-head">
-		<h2 class="t-h2">Members.</h2>
+		<h2 class="t-h2">Members</h2>
 	</div>
 	<div class="tier">
 		<div class="tier-head"><p class="tier">Steering members</p><p class="t-sm t-muted">Founders: Christie, NETGEAR, Semtech</p></div>
@@ -93,20 +93,20 @@
 
 <section id="join" class="container section">
 	<div class="section-head">
-		<h2 class="t-h2">Join the Alliance.</h2>
+		<h2 class="t-h2">Join the Alliance</h2>
 		<p class="t-lead">Ship interoperable products into a growing ecosystem, and help shape where it goes next.</p>
 	</div>
 	<div class="grid grid-2 tiers">
 		<div class="option selected plan">
 			<span class="option-badge">Most influence</span>
 			<p class="tier">Contributing member</p>
-			<h3 class="t-h4">Shape the standard.</h3>
+			<h3 class="t-h4">Shape the standard</h3>
 			<p class="t-body t-muted">Board eligibility, priority visibility and a voice in the roadmap.</p>
 			<a class="btn btn-primary" href="https://sdvoe.org/contact/">Talk to us</a>
 		</div>
 		<div class="option plan">
 			<p class="tier">Adopting member</p>
-			<h3 class="t-h4">Build on SDVoE.</h3>
+			<h3 class="t-h4">Build on SDVoE</h3>
 			<p class="t-body t-muted">List your products and join the ecosystem.</p>
 			<a class="btn btn-outline" href="https://sdvoe.org/contact/">Talk to us</a>
 		</div>

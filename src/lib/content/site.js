@@ -126,7 +126,7 @@ export const powerOf10 = [
 export const audiences = [
 	{
 		eyebrow: 'Consultants & integrators',
-		title: 'I design AV systems.',
+		title: 'I design AV systems',
 		text: 'Compare architectures, check specifications and get certified as an SDVoE Design Partner — free.',
 		links: [
 			{ label: 'Compare with HDBaseT', href: '/technology/compare' },
@@ -136,7 +136,7 @@ export const audiences = [
 	},
 	{
 		eyebrow: 'IT & technology managers',
-		title: 'I run the network.',
+		title: 'I run the network',
 		text: 'See why true AV/IT convergence only happens at 10G, and how SDVoE runs on off-the-shelf switches.',
 		links: [
 			{ label: 'AV/IT convergence', href: '/technology#convergence' },
@@ -146,7 +146,7 @@ export const audiences = [
 	},
 	{
 		eyebrow: 'Manufacturers',
-		title: 'I build AV products.',
+		title: 'I build AV products',
 		text: 'Ship interoperable endpoints on a royalty-free platform and join the companies already in the ecosystem.',
 		links: [
 			{ label: 'Membership benefits', href: '/alliance#join' },

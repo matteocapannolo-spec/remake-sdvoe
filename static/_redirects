@@ -45,3 +45,7 @@
 /news/press-releases/                          /news/                            301
 /news/member-press-releases/                   /news/                            301
 /blog/                                         /news/                            301
+
+# Legal
+/privacypolicy/                                /privacy-policy/                  301
+/privacypolicy                                 /privacy-policy/                  301

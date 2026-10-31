@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/state';
-	let { title, description } = $props();
+	// noindex: pages that should never show up in search results (the contact form's thank-you page)
+	let { title, description, noindex = false } = $props();
 
 	// Builds served from a sub-folder are previews (GitHub Pages): keep them out of search engines,
 	// they would duplicate sdvoe.org. __BASE_PATH__ comes from vite.config.js.
@@ -15,7 +16,7 @@
 <svelte:head>
 	<title>{full}</title>
 	<meta name="description" content={description} />
-	{#if preview}<meta name="robots" content="noindex, nofollow" />{/if}
+	{#if preview}<meta name="robots" content="noindex, nofollow" />{:else if noindex}<meta name="robots" content="noindex" />{/if}
 	<link rel="canonical" href={canonical} />
 	<meta property="og:site_name" content="SDVoE Alliance" />
 	<meta property="og:title" content={full} />

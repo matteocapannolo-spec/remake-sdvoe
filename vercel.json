@@ -155,6 +155,16 @@
       "source": "/blog/",
       "destination": "/news/",
       "permanent": true
+    },
+    {
+      "source": "/privacypolicy/",
+      "destination": "/privacy-policy/",
+      "permanent": true
+    },
+    {
+      "source": "/privacypolicy",
+      "destination": "/privacy-policy/",
+      "permanent": true
     }
   ]
 }
