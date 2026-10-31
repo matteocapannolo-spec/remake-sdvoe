@@ -8,6 +8,28 @@
 	import { stackLayers, benefits, processing } from '$lib/content/technology.js';
 	import { href } from '$lib/link.js';
 
+	// Each reason takes its colour from the Power of 10+ campaign wheel. fill: the wheel colour
+	// (top rule, number pill); on: text on that fill; ink: the same hue dark enough for text on
+	// white (WCAG AA 4.5:1), used for the title on hover. Bonus bandwidth is the Sky Blue of the
+	// "+Bonus Bandwidth" line, with Deep Blue as its ink (Sky Blue is never text on white).
+	const wheel = {
+		'Zero latency': ['#f7941d', '#3d2300', '#a85a00'],
+		'No compression': ['#0b7f94', '#ffffff', '#0b7f94'],
+		'Multiview and video wall': ['#ee5a3a', '#3f1205', '#c2401f'],
+		KVM: ['#d7282f', '#ffffff', '#d7282f'],
+		InstaSwitch: ['#b91d7f', '#ffffff', '#b91d7f'],
+		'USB 2.0 + video': ['#7e4a8d', '#ffffff', '#7e4a8d'],
+		'Ultra-low power': ['#e2c51e', '#3b3200', '#7a6a00'],
+		'Proven interoperability': ['#10adcf', '#04313b', '#0a7a93'],
+		'Standard software interface': ['#2dbda8', '#053a33', '#0f7a6b'],
+		'Ultimate flexibility': ['#8cc63f', '#1f3305', '#4a7a12'],
+		'Bonus bandwidth': ['#31a3e3', '#062a4a', '#0c67ba']
+	};
+	const hue = (title) => {
+		const [fill, on, ink] = wheel[title] ?? ['#0c67ba', '#ffffff', '#0c67ba'];
+		return `--wheel-fill:${fill}; --wheel-on:${on}; --wheel-ink:${ink}`;
+	};
+
 	const sections = [
 		{ id: 'power-of-10', label: 'Power of Ten+' },
 		{ id: 'how-it-works', label: 'How it works' },
@@ -33,12 +55,14 @@
 
 <section id="power-of-10" class="container section">
 	<div class="section-head">
-		<h2 class="t-h2">Eleven reasons, one platform.</h2>
-		<p class="t-lead">An off-the-shelf, end-to-end platform instead of a patchwork of components.</p>
+		<!-- campaign mark, from sdvoe.org (images-src/sdvoe-alliance-introduces-the-power-of-10.jpg, trimmed) -->
+		<img class="p10-logo" src={img('power-of-10-logo.jpg')} alt="The Power of 10+" width="560" height="415" loading="lazy" />
+		<h2 class="t-h2">10 + 1 Reasons, one Ecosystem.</h2>
+		<p class="t-lead">Ten core capabilities plus bonus bandwidth, shared by every certified product across an alliance of interoperable manufacturers.</p>
 	</div>
 	<ol role="list" class="grid grid-3 p10">
 		{#each powerOf10 as b, i}
-			<li class="card">
+			<li class="card" style={hue(b.title)}>
 				<span class="num">{String(i + 1).padStart(2, '0')}</span>
 				<h3 class="t-title">{b.title}</h3>
 				<p class="t-sm t-muted">{b.text}</p>
@@ -162,18 +186,36 @@
 </section>
 
 <style>
+	.p10-logo {
+		width: min(200px, 55%);
+		height: auto;
+		margin: 0 auto var(--s-lg);
+	}
 	.p10 {
 		margin: 0;
 	}
+	/* wheel colour: a rule along the top and the number in a pill; on hover the title takes it too */
 	.p10 .card {
 		display: grid;
 		gap: 8px;
 		align-content: start;
+		border-top: 4px solid var(--wheel-fill);
 	}
 	.num {
-		color: var(--primary);
+		justify-self: start;
+		padding: 2px 10px;
+		border-radius: var(--r-full);
+		background: var(--wheel-fill);
+		color: var(--wheel-on);
 		font-weight: var(--w-bold);
-		font-size: var(--fs-ui);
+		font-size: var(--fs-caption);
+		line-height: 1.5;
+	}
+	.p10 .card .t-title {
+		transition: color 0.2s ease;
+	}
+	.p10 .card:hover .t-title {
+		color: var(--wheel-ink);
 	}
 	.quote {
 		display: grid;
