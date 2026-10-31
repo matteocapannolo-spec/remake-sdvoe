@@ -103,7 +103,7 @@ Base: **DESIGN-dji.md**, cioè uno "showroom": fondo bianco, riquadri squadrati 
   - Provato e scartato: CSS dentro l'HTML (`inlineStyleThreshold`): misurato peggio (un unico blocco più lungo di lettura e stili, TBT più alto).
   - Attenzione nelle misure: `vite preview` legge l'elenco dei file all'avvio; dopo un nuovo `npm run build` va riavviato, altrimenti i file con il nuovo hash rispondono 404 e Lighthouse misura una pagina senza CSS.
   - Resta: LCP della home ~2,9 s su mobile simulato (la foto è scaricata in 0,2 s; il tempo è attesa del thread principale, soprattutto l'idratazione iniziale di Svelte).
-- **Accessibilità:** per superare il contrasto WCAG AA i grigi di DJI sono stati scuriti (#8C8C8C → #6E6E6E, #9FA3A6 → #707477). Le differenze a occhio sono minime. Sky Blue non si usa mai come testo su fondo chiaro (contrasto insufficiente).
+- **Accessibilità:** per superare il contrasto WCAG AA i grigi di DJI sono stati scuriti (#8C8C8C → #6E6E6E, #9FA3A6 → #707477). Le differenze a occhio sono minime. Sky Blue non si usa mai come testo su fondo chiaro (contrasto insufficiente). Unica eccezione voluta: il pulsante "Download the test pattern" in Technology → Sustainability è Sky Blue con testo bianco (circa 2,9:1, sotto AA), scelta del committente; Lighthouse lo segnala e l'accessibilità di quella pagina non arriva a 100.
 - **Su mobile** lo schema "come funziona" diventa una sequenza verticale, senza scorrimento laterale.
 
 ### Struttura del codice

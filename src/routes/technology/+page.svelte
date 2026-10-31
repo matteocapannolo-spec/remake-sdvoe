@@ -4,6 +4,8 @@
 	import PageHero from '$lib/components/PageHero.svelte';
 	import SubNav from '$lib/components/SubNav.svelte';
 	import HowItWorks from '$lib/components/HowItWorks.svelte';
+	import YouTube from '$lib/components/YouTube.svelte';
+	import { BadgeDollarSign, ArrowLeftRight, TrendingUp, Server, Network, Wrench, Download } from '@lucide/svelte';
 	import { powerOf10, img } from '$lib/content/site.js';
 	import { stackLayers, benefits, processing } from '$lib/content/technology.js';
 	import { href } from '$lib/link.js';
@@ -25,6 +27,9 @@
 		'Ultimate flexibility': ['#8cc63f', '#1f3305', '#4a7a12'],
 		'Bonus bandwidth': ['#31a3e3', '#062a4a', '#0c67ba']
 	};
+	// benefit icon key (technology.js) → Lucide icon
+	const benefitIcons = { cost: BadgeDollarSign, ports: ArrowLeftRight, scale: TrendingUp, rack: Server, network: Network, tools: Wrench };
+
 	const hue = (title) => {
 		const [fill, on, ink] = wheel[title] ?? ['#0c67ba', '#ffffff', '#0c67ba'];
 		return `--wheel-fill:${fill}; --wheel-on:${on}; --wheel-ink:${ink}`;
@@ -147,24 +152,19 @@
 <section id="sustainability" class="container section">
 	<div class="two">
 		<div class="stack-text">
-			<h2 class="t-h2">Better image. Less power.</h2>
+			<h2 class="t-h2">Better image, less power.</h2>
 			<p class="t-body">
 				The BlueRiver ASIC at the heart of SDVoE draws about 2 W. An ASIC can use more than 80% less power than an FPGA
 				doing the same job. In the Alliance's side-by-side shootout against popular 1G systems, SDVoE delivered the
 				better picture at the lower power draw.
 			</p>
 			<p class="t-body">Don't take our word for it: download the test pattern, show it 1:1 on your own system, and compare.</p>
-			<div class="btn-row">
+			<div class="btn-row shootout-btns">
 				<a class="btn btn-outline arrow" href="https://sdvoe.org/technology/sustainability-shootout/">Watch the shootout</a>
-				<a class="btn btn-soft" href="https://sdvoe.org/technology/sustainability-shootout/">Download the test pattern</a>
+				<a class="btn btn-download" href="https://sdvoe.org/technology/sustainability-shootout/"><Download size={18} strokeWidth={2} aria-hidden="true" />Download the test pattern</a>
 			</div>
 		</div>
-		<div class="energy card-soft">
-			<p class="t-caption">Chip power, indicative</p>
-			<div class="meter"><span style="--w: 18%"></span><b>SDVoE ASIC · ~2 W</b></div>
-			<div class="meter fpga"><span style="--w: 100%"></span><b>FPGA-based · 5× or more</b></div>
-			<p class="t-caption">VERIFY: replace with measured figures from the shootout before publishing.</p>
-		</div>
+		<YouTube id="2F6p5deD7N8" title="Sustainability Shootout: SDVoE is the best!" />
 	</div>
 </section>
 
@@ -175,6 +175,7 @@
 	<div class="grid grid-3">
 		{#each benefits as b}
 			<div class="card-soft">
+				{#if benefitIcons[b.icon]}{@const Icon = benefitIcons[b.icon]}<span class="b-icon" aria-hidden="true"><Icon size={22} strokeWidth={1.5} /></span>{/if}
 				<h3 class="t-title">{b.title}</h3>
 				<p class="t-sm t-muted" style="margin-top: 8px">{b.text}</p>
 			</div>
@@ -273,36 +274,28 @@
 	.conv-cols > div > * + * {
 		margin-top: var(--s-sm);
 	}
-	.energy {
+	/* side by side; they stack only where both can't fit */
+	.shootout-btns .btn {
+		white-space: nowrap;
+	}
+	/* same icon tile as the sector cards (solutions) and the menu */
+	.b-icon {
 		display: grid;
-		gap: var(--s-md);
-		padding: var(--s-xl);
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		margin-bottom: 12px;
+		border-radius: var(--r-sm);
+		background: var(--primary-tint);
+		color: var(--primary);
 	}
-	.meter {
-		position: relative;
-		height: 56px;
-		border-radius: var(--r-full);
-		background: var(--canvas);
-		overflow: hidden;
+	/* Sky Blue with white text, the client's choice: an accepted exception to WCAG AA (about 2.9:1) */
+	.btn-download {
+		background: var(--sdvoe-sky-blue);
+		color: #fff;
 	}
-	.meter span {
-		position: absolute;
-		inset: 0 auto 0 0;
-		width: var(--w);
-		border-radius: var(--r-full);
-		background: var(--accent);
-	}
-	.meter.fpga span {
-		background: var(--hairline);
-	}
-	.meter b {
-		position: relative;
-		display: flex;
-		align-items: center;
-		height: 100%;
-		padding-left: 20px;
-		color: var(--ink);
-		font-size: var(--fs-ui);
+	.btn-download:hover {
+		background: #2793d0;
 	}
 	.stackimg {
 		margin-top: var(--s-xl);

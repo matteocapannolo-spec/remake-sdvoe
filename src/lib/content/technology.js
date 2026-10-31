@@ -23,13 +23,14 @@ export const stackLayers = [
 	}
 ];
 
+// icon: key of the Lucide icon, mapped in routes/technology/+page.svelte
 export const benefits = [
-	{ title: 'Up to 90% lower cost per port', text: 'Ethernet switches cost far less per port than custom AV switches, and the price keeps falling.' },
-	{ title: 'Every port is an input or an output', text: 'Ethernet ports are bidirectional, so no more stranded inputs or outputs on a fixed chassis.' },
-	{ title: 'Scales without a forklift', text: 'High-bandwidth uplinks grow the system beyond the first switch. Custom AV frames must be replaced.' },
-	{ title: '48+ ports per rack unit', text: 'Ethernet switches use about a quarter of the rack space of custom AV switches.' },
-	{ title: 'One shared network', text: 'A full gigabit channel stays reserved for data, so AV and IT can share a single 10G backbone.' },
-	{ title: 'Tools IT already knows', text: 'Decades of LAN monitoring and control software apply directly to AV switching.' }
+	{ icon: 'cost', title: 'Up to 90% lower cost per port', text: 'Ethernet switches cost far less per port than custom AV switches, and the price keeps falling.' },
+	{ icon: 'ports', title: 'Every port is an input or an output', text: 'Ethernet ports are bidirectional, so no more stranded inputs or outputs on a fixed chassis.' },
+	{ icon: 'scale', title: 'Scales without a forklift', text: 'High-bandwidth uplinks grow the system beyond the first switch. Custom AV frames must be replaced.' },
+	{ icon: 'rack', title: '48+ ports per rack unit', text: 'Ethernet switches use about a quarter of the rack space of custom AV switches.' },
+	{ icon: 'network', title: 'One shared network', text: 'A full gigabit channel stays reserved for data, so AV and IT can share a single 10G backbone.' },
+	{ icon: 'tools', title: 'Tools IT already knows', text: 'Decades of LAN monitoring and control software apply directly to AV switching.' }
 ];
 
 export const processing = [

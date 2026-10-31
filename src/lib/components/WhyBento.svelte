@@ -126,7 +126,6 @@
 				</li>
 			{/each}
 		</ul>
-		<span class="ai-dots" aria-hidden="true">{#each aiPoints as _, i}<span style={`--i:${i}`}></span>{/each}</span>
 		<p class="works">Works with</p>
 		<ul role="list" class="agents">
 			{#each agentPlatforms as a, i}
@@ -410,31 +409,6 @@
 			transform: translateY(-14px);
 		}
 	}
-	.ai-dots {
-		display: flex;
-		gap: 6px;
-	}
-	.ai-dots span {
-		width: 6px;
-		height: 6px;
-		border-radius: 50%;
-		background: var(--primary);
-		opacity: 0.25;
-		animation: ai-dot 12s ease-in-out calc(var(--i) * 4s) infinite;
-	}
-	@keyframes ai-dot {
-		0%,
-		34%,
-		100% {
-			opacity: 0.25;
-			transform: none;
-		}
-		5%,
-		29% {
-			opacity: 1;
-			transform: scale(1.3);
-		}
-	}
 	.works {
 		margin-top: var(--s-xs);
 		font-size: var(--fs-caption);
@@ -502,8 +476,7 @@
 	}
 	/* reduced motion: the first point stays put, the pills sit side by side */
 	@media (prefers-reduced-motion: reduce) {
-		.ai-points li,
-		.ai-dots span {
+		.ai-points li {
 			animation: none;
 		}
 		.ai-points li:first-child {
