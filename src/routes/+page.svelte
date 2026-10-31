@@ -110,13 +110,10 @@
 </section>
 
 <!-- 2 · Ecosystem: the members, right under the hero -->
-<section class="section">
-	<div class="section-head">
-		<h2 class="t-h2">Built by {memberCount} pro AV, IT and chip companies</h2>
-		<p class="t-lead">Every certified product works with every other, whichever brand is on the box.</p>
-	</div>
+<section class="members" aria-label="SDVoE Alliance members">
+	<p class="container t-body t-muted members-intro">An ecosystem built together by multiple pro AV, IT and chip companies for a full interoperability</p>
 	<div class="bleed"><LogoWall logos={allLogos} marquee /></div>
-	<p class="members-link"><a class="t-blue arrow" href={href('/alliance/#members')}>See all members</a></p>
+	<p class="members-link"><a class="arrow" href={href('/alliance/#members')}>See all members</a></p>
 </section>
 
 <!-- 3–4 · Grey store band: "What's Hot" cards, then the "Why" bento with the key figures -->
@@ -246,9 +243,23 @@
 		/* the Explore row runs to the window edges: never let it widen the page */
 		overflow-x: clip;
 	}
-	.members-link {
-		margin-top: var(--s-xl);
+	/* a slim band: the logos keep their size, with less air around them */
+	.members {
+		padding-block: var(--s-xxl) var(--s-xl);
+	}
+	.members-intro {
+		margin-bottom: var(--s-xs);
 		text-align: center;
+	}
+	.members-link {
+		font-size: var(--fs-ui);
+		text-align: center;
+	}
+	.members-link a {
+		color: var(--ink-tertiary);
+	}
+	.members-link a:hover {
+		text-decoration: underline;
 	}
 	.store-head {
 		margin-bottom: var(--s-xl);

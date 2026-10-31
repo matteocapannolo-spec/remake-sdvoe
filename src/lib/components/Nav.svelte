@@ -19,9 +19,7 @@
 		handshake: Handshake, news: Newspaper
 	};
 
-	// overlay: transparent nav with white labels over the home hero (DJI nav-bar-overlay).
-	// Solid (any other page, or the home once scrolled or with a menu open): Deep Blue like the footer,
-	// white labels and logo, so the bar keeps the same look whether or not it is over the hero.
+	// overlay: transparent nav with white labels over the home hero (DJI nav-bar-overlay)
 	let { overlay = false } = $props();
 
 	let open = $state(false);
@@ -71,10 +69,15 @@
 <header class="nav" class:overlay class:solid bind:this={header} style={`--sheet-top: ${sheetTop}px`} onmouseleave={() => (openItem = null)}>
 	<nav class="bar" aria-label="Main">
 		<a class="brand" href={href('/')} aria-label="SDVoE Alliance home">
-			<!-- white on both the hero and the Deep Blue bar -->
-			<span class="logo">
-				<Img src={logos.white} alt="SDVoE Alliance" width="104" height="36">{#snippet fallback()}<Wordmark inverse />{/snippet}</Img>
+			<!-- both versions stay loaded and cross-fade, so the swap over the hero is smooth -->
+			<span class="logo logo-colour" aria-hidden={!solid}>
+				<Img src={logos.colour} alt="SDVoE Alliance" width="104" height="36">{#snippet fallback()}<Wordmark />{/snippet}</Img>
 			</span>
+			{#if overlay}
+				<span class="logo logo-white" aria-hidden="true">
+					<Img src={logos.white} alt="" width="104" height="36">{#snippet fallback()}<Wordmark inverse />{/snippet}</Img>
+				</span>
+			{/if}
 		</a>
 
 		<ul class="links" role="list">
@@ -94,9 +97,8 @@
 		</ul>
 
 		<div class="actions">
-			<div class="lang"><LangSwitch inverse /></div>
-			<!-- Deep Blue pill over the hero, white pill on the Deep Blue bar -->
-			<a class={solid ? 'btn btn-sm store light' : 'btn btn-primary btn-sm store'} href={href('/products#finder')}>Find products</a>
+			<div class="lang"><LangSwitch inverse={!solid} /></div>
+			<a class="btn btn-primary btn-sm store" href={href('/products#finder')}>Find products</a>
 			<button class="burger" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onclick={toggleSheet}>
 				<span></span><span></span><span></span>
 			</button>
@@ -150,10 +152,10 @@
 				{/each}
 			</ul>
 			<div class="sheet-foot">
-				<a class="btn btn-lg light" href={href('/products#finder')}>Find products</a>
-				<a class="btn btn-inverse btn-lg" href={href('/alliance#join')}>Join the Alliance</a>
+				<a class="btn btn-primary btn-lg" href={href('/products#finder')}>Find products</a>
+				<a class="btn btn-outline btn-lg" href={href('/alliance#join')}>Join the Alliance</a>
 				<p class="sheet-label">Language</p>
-				<LangSwitch variant="sheet" inverse />
+				<LangSwitch variant="sheet" />
 			</div>
 		</div>
 	{/if}
@@ -165,15 +167,16 @@
 		position: sticky;
 		top: 0;
 		z-index: 50;
-		background: var(--footer);
-		color: #fff;
+		background: var(--canvas);
+		color: var(--nav-ink);
+		box-shadow: 0 1px 0 transparent;
 		transition:
 			background-color var(--nav-fade),
-			color var(--nav-fade);
+			color var(--nav-fade),
+			box-shadow var(--nav-fade);
 	}
-	/* focus rings: white on the blue bar, menus and sheet (the global ring is Deep Blue) */
-	.nav :focus-visible {
-		outline-color: #fff;
+	.nav.solid {
+		box-shadow: 0 1px 0 var(--divider);
 	}
 	/* home: sit on top of the hero */
 	.nav.overlay {
@@ -195,8 +198,17 @@
 		display: grid;
 	}
 	.logo {
+		grid-area: 1 / 1;
 		display: flex;
 		align-items: center;
+		transition: opacity var(--nav-fade);
+	}
+	.logo-white,
+	.nav.overlay:not(.solid) .logo-colour {
+		opacity: 0;
+	}
+	.nav.overlay:not(.solid) .logo-white {
+		opacity: 1;
 	}
 	.brand :global(img) {
 		width: 112px;
@@ -221,14 +233,6 @@
 	}
 	.link-btn.active {
 		border-bottom-color: currentColor;
-	}
-	/* white pill with Deep Blue text, on the blue bar and in the sheet */
-	.light {
-		background: #fff;
-		color: var(--primary);
-	}
-	.light:hover {
-		background: var(--primary-tint);
 	}
 	.actions {
 		display: flex;
@@ -277,9 +281,9 @@
 		left: 0;
 		right: 0;
 		top: var(--nav-h);
-		background: var(--footer);
-		color: #fff;
-		border-top: 1px solid var(--footer-divider);
+		background: var(--canvas);
+		color: var(--ink);
+		border-top: 1px solid var(--divider);
 		box-shadow: var(--float-shadow);
 	}
 	.mega-inner {
@@ -292,7 +296,6 @@
 		font-size: var(--fs-title);
 		font-weight: var(--w-bold);
 		letter-spacing: var(--track-heading);
-		color: #fff;
 		text-decoration: none;
 	}
 	.mega-list {
@@ -317,15 +320,15 @@
 		width: 40px;
 		height: 40px;
 		border-radius: var(--r-sm);
-		background: rgb(255 255 255 / 0.14);
-		color: #fff;
+		background: var(--primary-tint);
+		color: var(--primary);
 		transition:
 			background-color 0.15s ease,
 			color 0.15s ease;
 	}
 	.mega-list a:hover .m-icon {
-		background: #fff;
-		color: var(--primary);
+		background: var(--primary);
+		color: #fff;
 	}
 	/* "Power of 10+" item (rainbow: true in site.js): on hover the tile fills with the ten colours
 	   of the Power of 10+ wheel, flowing sideways as flat bands. The colours are the
@@ -381,25 +384,24 @@
 		grid-column: 2;
 		align-self: end;
 		font-size: var(--fs-body);
-		color: #fff;
+		color: var(--ink);
 	}
 	.mega-list a:hover .m-label {
-		text-decoration: underline;
-		text-underline-offset: 3px;
+		color: var(--primary);
 	}
 	.m-desc {
 		grid-column: 2;
 		align-self: start;
 		font-size: var(--fs-caption);
-		color: var(--footer-placeholder);
+		color: var(--ink-tertiary);
 	}
 	.sheet {
 		position: fixed;
 		inset: var(--sheet-top, var(--nav-h)) 0 0;
 		overflow-y: auto;
 		padding: var(--s-md) var(--gutter) var(--s-huge);
-		background: var(--footer);
-		color: #fff;
+		background: var(--canvas);
+		color: var(--ink);
 	}
 	.sheet > ul {
 		list-style: none;
@@ -407,7 +409,7 @@
 		padding: 0;
 	}
 	.sheet-item {
-		border-bottom: 1px solid var(--footer-divider);
+		border-bottom: 1px solid var(--divider);
 	}
 	.sheet-link {
 		display: flex;
@@ -417,7 +419,6 @@
 		padding: 16px 0;
 		border: 0;
 		background: none;
-		color: inherit;
 		font-size: var(--fs-body);
 		font-weight: var(--w-bold);
 		cursor: pointer;
@@ -435,13 +436,13 @@
 		align-items: center;
 		gap: var(--s-sm);
 		padding: 10px 0;
-		color: var(--footer-link);
+		color: var(--ink-secondary);
 		font-size: var(--fs-ui);
 		text-decoration: none;
 	}
 	.s-icon {
 		display: inline-flex;
-		color: #fff;
+		color: var(--primary);
 	}
 	.sheet-foot {
 		display: grid;
@@ -453,7 +454,7 @@
 		margin-top: var(--s-md);
 		font-size: var(--fs-caption);
 		font-weight: var(--w-bold);
-		color: var(--footer-placeholder);
+		color: var(--ink-secondary);
 	}
 
 	@media (max-width: 1023px) {

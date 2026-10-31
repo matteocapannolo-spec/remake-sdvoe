@@ -68,16 +68,9 @@
 	</a>
 
 	<a class="cell" href={href('/technology#how-it-works')}>
-		<h3 class="title">Off-the-shelf 10G switches</h3>
-		<svg class="glyph" viewBox="0 0 160 80" aria-hidden="true">
-			<rect x="10" y="22" width="140" height="40" rx="4" fill="none" stroke="#3a3f46" stroke-width="4" />
-			{#each [0, 1, 2, 3, 4, 5] as i}
-				<rect x={24 + i * 17} y="34" width="11" height="9" rx="1.5" fill="#3a3f46" />
-				<rect x={26 + i * 17} y="48" width="7" height="3" rx="1" fill="#31a3e3" />
-			{/each}
-			<rect x="128" y="34" width="10" height="17" rx="2" fill="#0c67ba" />
-			<path d="M0 12h46M10 4h28" stroke="#0c67ba" stroke-width="4" stroke-linecap="round" />
-		</svg>
+		<h3 class="title">Runs on standard 10G switches</h3>
+		<!-- a NETGEAR 10G switch, cut out along its outline (images-src/why-switch.png) -->
+		<img class="switch" src={img('why-switch.png')} alt="" loading="lazy" width="638" height="155" />
 	</a>
 
 	<a class="cell" href={href('/products#finder')}>
@@ -229,9 +222,19 @@
 	.cell:nth-child(4) .big {
 		margin-block: 0;
 	}
-	.glyph {
-		width: min(100%, 180px);
+	/* cut-out photo: drop-shadow follows its outline; on hover it comes forward, the shadow deepens */
+	.switch {
+		width: min(100%, 300px);
+		height: auto;
 		margin-block: auto;
+		filter: drop-shadow(0 8px 10px rgb(0 0 0 / 0.18)) drop-shadow(0 2px 3px rgb(0 0 0 / 0.1));
+		transition:
+			scale 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+			filter 0.45s ease;
+	}
+	.cell:hover .switch {
+		scale: 1.08;
+		filter: drop-shadow(0 16px 18px rgb(0 0 0 / 0.24)) drop-shadow(0 4px 6px rgb(0 0 0 / 0.12));
 	}
 	/* the photo is a bit wider than the card, tilted a few degrees and cropped by its edges;
 	   drop-shadow follows the cut-out's outline (the one shadow allowed in these cards) */
@@ -478,6 +481,9 @@
 	@media (prefers-reduced-motion: reduce) {
 		.ai-points li {
 			animation: none;
+		}
+		.cell:hover .switch {
+			scale: none;
 		}
 		.ai-points li:first-child {
 			opacity: 1;

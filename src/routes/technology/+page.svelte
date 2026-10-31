@@ -4,8 +4,9 @@
 	import SubNav from '$lib/components/SubNav.svelte';
 	import HowItWorks from '$lib/components/HowItWorks.svelte';
 	import YouTube from '$lib/components/YouTube.svelte';
+	import LightBeams from '$lib/components/LightBeams.svelte';
 	import { BadgeDollarSign, ArrowLeftRight, TrendingUp, Server, Network, Wrench, Download } from '@lucide/svelte';
-	import { powerOf10, img } from '$lib/content/site.js';
+	import { powerOf10, localImg } from '$lib/content/site.js';
 	import { stackLayers, benefits, processing } from '$lib/content/technology.js';
 	import { href } from '$lib/link.js';
 
@@ -58,11 +59,16 @@
 {/snippet}
 
 <PageHero eyebrow="Why SDVoE" title="10 + 1 Reasons, one Ecosystem" lead="Ten core capabilities plus bonus bandwidth, shared by every certified product across an alliance of interoperable manufacturers.">
-	{#snippet mark()}
-		<!-- campaign mark, from sdvoe.org (images-src/sdvoe-alliance-introduces-the-power-of-10.jpg, trimmed) -->
-		<img class="p10-logo" src={img('power-of-10-logo.jpg')} alt="The Power of 10+" width="560" height="415" fetchpriority="high" />
+	{#snippet backdrop()}
+		<!-- darkened abstract render (images-src/why-hero-bg.jpg), with one light beam per reason in its wheel colour -->
+		<img class="why-bg" src={localImg('why-hero-bg.jpg')} alt="" width="1600" height="900" decoding="async" />
+		<LightBeams colors={Object.values(wheel).map(([fill]) => fill)} />
 	{/snippet}
-	{@render actions()}
+	{#snippet mark()}
+		<!-- campaign mark for dark backgrounds, made by scripts/p10-logo-on-dark.mjs -->
+		<img class="p10-logo" src={localImg('power-of-10-logo-on-dark.png')} alt="The Power of 10+" width="560" height="416" fetchpriority="high" />
+	{/snippet}
+	<a class="btn btn-ghost" href={href('/technology/specifications')}>Specifications</a>
 </PageHero>
 
 <section id="power-of-10" class="container section" aria-labelledby="p10-title">
@@ -100,7 +106,7 @@
 			</li>
 		{/each}
 	</ol>
-	<!-- the hero's actions again, for readers who got this far -->
+	<!-- where to go next, for readers who got this far -->
 	<div class="btn-row stack-actions">{@render actions()}</div>
 </section>
 
@@ -189,6 +195,15 @@
 </section>
 
 <style>
+	/* the render, darkened: faint over the near-black stage */
+	.why-bg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		opacity: 0.32;
+	}
 	.p10-logo {
 		width: min(200px, 55%);
 		height: auto;
