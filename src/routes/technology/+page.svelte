@@ -1,5 +1,4 @@
 <script>
-	import Img from '$lib/components/Img.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import PageHero from '$lib/components/PageHero.svelte';
 	import SubNav from '$lib/components/SubNav.svelte';
@@ -187,9 +186,6 @@
 			</div>
 		{/each}
 	</div>
-	<figure class="media stackimg">
-		<Img src={img('analog-software-timeline.jpg')} alt="Timeline: every electronic communication moves from analog to digital, to packets, to software platforms." loading="lazy">{#snippet fallback()}<div class="ph ph-wide"><span>Analog → digital → packets → software platforms</span></div>{/snippet}</Img>
-	</figure>
 </section>
 
 <style>
@@ -306,10 +302,6 @@
 	}
 	.btn-download:hover {
 		background: #2793d0;
-	}
-	.stackimg {
-		margin-top: var(--s-xl);
-		border-radius: var(--r-md);
 	}
 	@media (max-width: 900px) {
 		.two,

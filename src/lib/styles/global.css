@@ -188,15 +188,15 @@ textarea {
 /* ── Text links with chevron ── */
 .link,
 .arrow {
-	display: inline-flex;
-	align-items: center;
-	gap: 4px;
 	color: var(--primary);
 	text-decoration: none;
 }
+/* inline-block: the link's hover underline stops at the text and never runs under the arrow */
 .link::after,
 .arrow::after {
 	content: '›';
+	display: inline-block;
+	margin-left: 4px;
 	font-size: 1.2em;
 	line-height: 1;
 	transition: transform 0.15s ease;

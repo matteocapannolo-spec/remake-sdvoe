@@ -61,7 +61,14 @@ export const hdbaset = {
 		text: 'Same brief for both: switching of multiple inputs, extension, a 2×2 video wall, one multiview display and KVM control over sources.',
 		traditional: { devices: 22, image: img('traditional-system-drawing.png') },
 		sdvoe: { devices: 12, image: img('sdvoe-system-drawing.png') },
-		savings: '30–50%'
+		savings: '30–50%',
+		// headline figures for the two designs, shown side by side on the compare page
+		summary: [
+			{ label: 'Devices for the same brief', sdvoe: '12', other: '22' },
+			{ label: 'System budget', sdvoe: '−30–50%', other: 'Baseline' },
+			{ label: 'Switching infrastructure', sdvoe: 'Off-the-shelf', other: 'Custom AV' },
+			{ label: 'Video walls & multiview', sdvoe: 'Built in', other: 'Extra devices' }
+		]
 	}
 };
 

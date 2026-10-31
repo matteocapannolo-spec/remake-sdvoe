@@ -53,7 +53,7 @@
 		{/if}
 	</div>
 {:else}
-	<ul class="grid" role="list" aria-label="Choose a language">
+	<ul class="grid" class:inverse role="list" aria-label="Choose a language">
 		{#each languages as l}
 			<li>
 				<button class="option chip" class:current={l.code === current.code} aria-current={l.code === current.code ? 'true' : undefined}>
@@ -94,6 +94,10 @@
 	}
 	.inverse .pill:hover {
 		background: rgb(255 255 255 / 0.25);
+	}
+	.inverse .pill:focus-visible,
+	.inverse .chip:focus-visible {
+		outline-color: #fff;
 	}
 	.flag {
 		flex: none;
@@ -170,5 +174,18 @@
 	.chip.current {
 		border-color: var(--primary);
 		background: var(--primary-tint);
+	}
+	/* on the Deep Blue mobile menu */
+	.inverse .chip {
+		border-color: rgb(255 255 255 / 0.3);
+		color: #fff;
+	}
+	.inverse .chip:hover {
+		background: rgb(255 255 255 / 0.12);
+	}
+	.inverse .chip.current {
+		border-color: #fff;
+		background: #fff;
+		color: var(--primary);
 	}
 </style>

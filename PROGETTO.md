@@ -75,7 +75,7 @@ Base: **DESIGN-dji.md**, cioè uno "showroom": fondo bianco, riquadri squadrati 
 - Card con foto e titolo bianco sovrapposto per i casi studio. Card bianche su fascia grigia per i percorsi per pubblico.
 - Confronto a colonne con valori grandi e linguette sottolineate. Filtri come pillole che si riempiono di nero quando sono attive.
 - Livelli di adesione come le schede "opzione" dello store DJI: angoli da 8 px, bordo blu da 2 px sulla scheda consigliata, badge blu nell'angolo.
-- FAQ a righe separate da un filo. Fascia finale con tre collegamenti (prodotti, aiuto alla progettazione, prossima fiera). Footer antracite con promozione dell'Academy, iscrizione alla newsletter e colonne di link. Pulsante "torna su" galleggiante.
+- FAQ a righe separate da un filo. La fascia finale con tre collegamenti (prodotti, aiuto alla progettazione, prossima fiera) è stata tolta dalla home il 31 ottobre. Footer Deep Blue con promozione dell'Academy, iscrizione alla newsletter, social e colonne di link. Pulsante "torna su" galleggiante.
 
 **Regole:** niente angoli arrotondati su riquadri e card (solo pillole, schede opzione, etichette e le card in stile store della home). Niente ombre, tranne pannello del menu, pulsante "torna su", hover delle card in stile store della home (come su DJI) e immagini scontornate che sporgono. Niente arancione: gli accenti sono solo i due blu SDVoE (unica eccezione: i colori della ruota "Power of 10+" sull'icona di "Why SDVoE" nel menu). Testo mai nero puro.
 

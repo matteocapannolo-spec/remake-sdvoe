@@ -7,7 +7,7 @@
 	import ExploreCards from '$lib/components/ExploreCards.svelte';
 	import WhyBento from '$lib/components/WhyBento.svelte';
 	import NeonFiber from '$lib/components/NeonFiber.svelte';
-	import { stats, audiences, members, memberCount, news, events, formatDate, localImg } from '$lib/content/site.js';
+	import { stats, audiences, members, memberCount, news, formatDate, localImg } from '$lib/content/site.js';
 
 	// Hero backdrop photo (original in images-src/, converted by `npm run images -- --from images-src`)
 	const heroPhoto = localImg('hero-bg.jpg');
@@ -81,12 +81,6 @@
 		}
 	];
 
-	const compareRows = [
-		{ label: 'Devices for the same brief', sdvoe: '12', other: '22' },
-		{ label: 'System budget', sdvoe: '−30–50%', other: 'Baseline' },
-		{ label: 'Switching infrastructure', sdvoe: 'Off-the-shelf', other: 'Custom AV' },
-		{ label: 'Video walls & multiview', sdvoe: 'Built in', other: 'Extra devices' }
-	];
 </script>
 
 <Seo description="SDVoE delivers uncompressed 4K60 video with under 100 µs latency over standard 10G Ethernet, interoperable across hundreds of products from dozens of manufacturers." />
@@ -166,31 +160,6 @@
 	</div>
 </section>
 
-<!-- 7 · Comparison: spec columns -->
-<section class="container section defer-render">
-	<div class="section-head">
-		<h2 class="t-h2">SDVoE vs. an HDBaseT matrix</h2>
-		<p class="t-lead">Same brief: switching, extension, a 2×2 video wall, a multiview display and KVM.</p>
-	</div>
-	<div class="cmp">
-		<div class="cmp-col">
-			<p class="tier">Recommended</p>
-			<p class="model">SDVoE design</p>
-			{#each compareRows as r}
-				<div class="cmp-row"><span class="t-spec">{r.sdvoe}</span><span class="t-sm t-steel">{r.label}</span></div>
-			{/each}
-		</div>
-		<div class="cmp-col">
-			<p class="tier" style="visibility: hidden">—</p>
-			<p class="model">HDBaseT matrix</p>
-			{#each compareRows as r}
-				<div class="cmp-row"><span class="t-spec t-muted">{r.other}</span><span class="t-sm t-steel">{r.label}</span></div>
-			{/each}
-		</div>
-	</div>
-	<p class="center" style="margin-top: var(--s-xxl)"><a class="btn btn-outline btn-lg" href={href('/technology/compare')}>Compare architectures ›</a></p>
-</section>
-
 <!-- 8 · Field cards: case studies -->
 <section class="section defer-render">
 	<div class="container section-head"><h2 class="t-h2">Running today, worldwide</h2><p class="t-lead">{caseStudies.length} published case studies, from parliaments to theme parks.</p></div>
@@ -213,27 +182,6 @@
 		{/each}
 	</div>
 	<p class="center" style="margin-top: var(--s-xl)"><a class="link" href={href('/news')}>Newsroom</a></p>
-</section>
-
-<!-- 10 · Feature-link band -->
-<section class="band defer-render">
-	<div class="container band-grid">
-		<a class="band-item" href={href('/products#finder')}>
-			<svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="9" width="22" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M9 14h4M9 18h8" stroke="currentColor" stroke-width="1.5" /></svg>
-			<span class="band-title">Find products</span>
-			<span class="link t-sm">Certified interoperable</span>
-		</a>
-		<a class="band-item" href="https://sdvoe.org/contact/">
-			<svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="10" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M6 16h20M16 6c4 4 4 16 0 20M16 6c-4 4-4 16 0 20" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
-			<span class="band-title">Free design help</span>
-			<span class="link t-sm">Talk to a network expert</span>
-		</a>
-		<a class="band-item" href={href('/news#events')}>
-			<svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="8" width="20" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M6 13h20M11 5v6M21 5v6" stroke="currentColor" stroke-width="1.5" /></svg>
-			<span class="band-title">Meet us at {events[0].name}</span>
-			<span class="link t-sm">{events[0].place}</span>
-		</a>
-	</div>
 </section>
 
 <style>
@@ -326,33 +274,6 @@
 		margin-top: auto;
 		padding-top: var(--s-md);
 	}
-	/* comparison */
-	.cmp {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		max-width: 880px;
-		margin: 0 auto;
-		border-top: 1px solid var(--hairline);
-	}
-	.cmp-col {
-		display: grid;
-		justify-items: center;
-		gap: var(--s-xl);
-		padding: var(--s-xxl) var(--s-md);
-		text-align: center;
-	}
-	.cmp-col:first-child {
-		border-right: 1px solid var(--hairline);
-	}
-	.model {
-		font-size: var(--fs-title);
-		letter-spacing: var(--track-heading);
-		margin-top: -16px;
-	}
-	.cmp-row {
-		display: grid;
-		gap: 2px;
-	}
 	/* news */
 	.news-card {
 		display: grid;
@@ -364,37 +285,5 @@
 	}
 	.news-card:hover .t-title {
 		color: var(--primary);
-	}
-	/* band */
-	.band {
-		background: var(--canvas-soft);
-		padding-block: var(--s-section);
-		margin-top: var(--s-section);
-	}
-	.band-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: var(--s-xl);
-	}
-	.band-item {
-		display: grid;
-		justify-items: center;
-		gap: var(--s-xs);
-		text-align: center;
-		text-decoration: none;
-		color: var(--ink);
-	}
-	.band-title {
-		font-size: var(--fs-subhead);
-		font-weight: var(--w-medium);
-		margin-top: var(--s-xs);
-	}
-	@media (max-width: 768px) {
-		.band-grid {
-			grid-template-columns: 1fr;
-		}
-		.cmp-col {
-			padding-inline: 4px;
-		}
 	}
 </style>

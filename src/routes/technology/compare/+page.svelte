@@ -49,7 +49,23 @@
 				<h2 class="t-h2">Half the devices for the same brief</h2>
 				<p class="t-lead">{hdbaset.example.text}</p>
 			</div>
-			<div class="grid grid-2">
+			<div class="duel">
+				<div class="duel-col">
+					<p class="tier">Recommended</p>
+					<p class="model">SDVoE design</p>
+					{#each hdbaset.example.summary as r}
+						<div class="duel-row"><span class="t-spec">{r.sdvoe}</span><span class="t-sm t-steel">{r.label}</span></div>
+					{/each}
+				</div>
+				<div class="duel-col">
+					<p class="tier" style="visibility: hidden">—</p>
+					<p class="model">HDBaseT matrix</p>
+					{#each hdbaset.example.summary as r}
+						<div class="duel-row"><span class="t-spec t-muted">{r.other}</span><span class="t-sm t-steel">{r.label}</span></div>
+					{/each}
+				</div>
+			</div>
+			<div class="grid grid-2 drawings">
 				<figure class="card diagram">
 					<figcaption><span class="t-h3">{hdbaset.example.traditional.devices}</span> <span class="t-muted">devices · HDBaseT matrix design</span></figcaption>
 					<div class="media"><Img src={hdbaset.example.traditional.image} alt="System drawing of a traditional HDBaseT matrix design with 22 devices" loading="lazy">{#snippet fallback()}<div class="ph"><span>System drawing of a traditional HDBaseT matrix design with 22 devices</span></div>{/snippet}</Img></div>
@@ -107,6 +123,41 @@
 		background: var(--canvas-soft);
 		color: var(--primary);
 		font-weight: var(--w-bold);
+	}
+	/* the two designs' headline figures, side by side (was on the home page) */
+	.duel {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		max-width: 880px;
+		margin: 0 auto;
+		border-top: 1px solid var(--hairline);
+	}
+	.duel-col {
+		display: grid;
+		justify-items: center;
+		gap: var(--s-xl);
+		padding: var(--s-xxl) var(--s-md);
+		text-align: center;
+	}
+	.duel-col:first-child {
+		border-right: 1px solid var(--hairline);
+	}
+	.model {
+		font-size: var(--fs-title);
+		letter-spacing: var(--track-heading);
+		margin-top: -16px;
+	}
+	.duel-row {
+		display: grid;
+		gap: 2px;
+	}
+	.drawings {
+		margin-top: var(--s-section);
+	}
+	@media (max-width: 768px) {
+		.duel-col {
+			padding-inline: 4px;
+		}
 	}
 	.diagram {
 		display: grid;
