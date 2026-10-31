@@ -43,14 +43,10 @@
 		<p class="big">{products.value}</p>
 	</a>
 
-	<a class="cell" href={href('/solutions#applications')}>
+	<!-- DJI store card: title on top, a cut-out product photo running off the bottom-right edge -->
+	<a class="cell photo" href={href('/solutions#applications')}>
 		<h3 class="title">Video walls & multiview built in</h3>
-		<svg class="glyph" viewBox="0 0 160 90" aria-hidden="true">
-			{#each [[22, 6], [82, 6], [22, 44], [82, 44]] as [x, y], i}
-				<rect {x} {y} width="56" height="34" rx="2" fill={i === 1 ? '#0c67ba' : '#3a3f46'} />
-			{/each}
-			<path d="M24 38 50 18 80 34 112 14 136 28" fill="none" stroke="#31a3e3" stroke-width="3" stroke-linejoin="round" />
-		</svg>
+		<Img src={img('why-video-wall.png')} alt="" loading="lazy" width="720" height="712">{#snippet fallback()}{/snippet}</Img>
 	</a>
 
 	<a class="cell" href={href('/technology')}>
@@ -167,6 +163,31 @@
 		width: min(100%, 180px);
 		margin-block: auto;
 	}
+	/* the photo is a bit wider than the card, tilted a few degrees and cropped by its edges;
+	   drop-shadow follows the cut-out's outline (the one shadow allowed in these cards) */
+	.photo {
+		position: relative;
+		overflow: hidden;
+	}
+	.photo .title {
+		position: relative;
+		z-index: 1;
+	}
+	.photo :global(img) {
+		position: absolute;
+		left: -6%;
+		/* just under the title (two lines on desktop, up to three on phones) */
+		top: max(22%, 62px);
+		width: 112%;
+		height: auto;
+		max-width: none;
+		rotate: -4deg;
+		filter: drop-shadow(0 12px 14px rgb(0 0 0 / 0.22)) drop-shadow(0 2px 3px rgb(0 0 0 / 0.12));
+		transition: translate 0.4s ease;
+	}
+	.photo:hover :global(img) {
+		translate: 0 -6px;
+	}
 	.note {
 		font-size: var(--fs-ui);
 		color: var(--ink-secondary);
@@ -203,6 +224,10 @@
 		.members {
 			grid-column: 1 / -1;
 		}
+		/* wide, short cards here: room for the photo below the title */
+		.photo {
+			min-height: 270px;
+		}
 		.logos {
 			grid-template-columns: repeat(3, auto);
 			gap: var(--s-md) var(--s-xl);
@@ -222,6 +247,13 @@
 		}
 		.title {
 			font-size: var(--fs-body);
+		}
+		/* taller, so the photo shows more than its top edge (the row's other card grows with it) */
+		.photo {
+			min-height: 200px;
+		}
+		.photo :global(img) {
+			top: 48px;
 		}
 		.big {
 			font-size: 2.25rem;
