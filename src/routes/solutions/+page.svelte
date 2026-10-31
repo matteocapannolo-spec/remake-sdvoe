@@ -6,6 +6,13 @@
 	import CaseCard from '$lib/components/CaseCard.svelte';
 	import { caseStudies, caseSectors } from '$lib/content/caseStudies.js';
 	import { applications, sectors } from '$lib/content/solutions.js';
+	import { MonitorDot, Landmark, GraduationCap, Stethoscope, Clapperboard, Presentation, Shield, Theater } from '@lucide/svelte';
+
+	// Sector icons (Lucide, ISC licence), keyed by `icon` in solutions.js
+	const sectorIcons = {
+		controlRoom: MonitorDot, government: Landmark, education: GraduationCap, medical: Stethoscope,
+		live: Clapperboard, enterprise: Presentation, defense: Shield, venues: Theater
+	};
 
 	let sector = $state('All');
 	const sectorList = caseSectors;
@@ -42,6 +49,7 @@
 	<div class="grid grid-4">
 		{#each sectors as s}
 			<svelte:element this={s.href ? 'a' : 'div'} href={s.href} class="card-soft sector">
+				{#if sectorIcons[s.icon]}{@const Icon = sectorIcons[s.icon]}<span class="s-icon" aria-hidden="true"><Icon size={22} strokeWidth={1.5} /></span>{/if}
 				<h3 class="t-title">{s.title}</h3>
 				<p class="t-sm t-muted">{s.text}</p>
 				{#if s.href}<span class="t-sm arrow t-blue">Read the whitepaper</span>{/if}
@@ -88,6 +96,24 @@
 		gap: 8px;
 		align-content: start;
 		text-decoration: none;
+	}
+	/* same icon tile as the menu (Nav.svelte .m-icon) */
+	.s-icon {
+		display: grid;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		margin-bottom: 8px;
+		border-radius: var(--r-sm);
+		background: var(--primary-tint);
+		color: var(--primary);
+		transition:
+			background-color 0.15s ease,
+			color 0.15s ease;
+	}
+	a.sector:hover .s-icon {
+		background: var(--primary);
+		color: #fff;
 	}
 	.filters {
 		display: flex;

@@ -27,13 +27,14 @@ export const applications = [
 	}
 ];
 
+// icon: key of the Lucide icon, mapped in routes/solutions/+page.svelte
 export const sectors = [
-	{ title: 'Control rooms & command centers', text: 'Zero latency and instant switching for operators who cannot wait.' },
-	{ title: 'Government & judicial', text: 'Chambers, hearing rooms and offices on one scalable network.' },
-	{ title: 'Education', text: 'Hybrid and HyFlex classrooms, lecture halls and campus-wide distribution.' },
-	{ title: 'Medical', text: 'Visually lossless endoscopic video for operating rooms.', href: 'https://sdvoe.org/technology/use-cases/medical/' },
-	{ title: 'Live production & esports', text: 'Frame-accurate switching for stages, arenas and competitive gaming.' },
-	{ title: 'Enterprise & conference rooms', text: 'USB, BYOD and video over a single cable to every room.' },
-	{ title: 'Defense & simulation', text: 'Glass-to-glass latency measured in hundredths of a millisecond.' },
-	{ title: 'Venues & culture', text: 'Auditoriums, opera houses and civic centers that change program nightly.' }
+	{ title: 'Control rooms & command centers', icon: 'controlRoom', text: 'Zero latency and instant switching for operators who cannot wait.' },
+	{ title: 'Government & judicial', icon: 'government', text: 'Chambers, hearing rooms and offices on one scalable network.' },
+	{ title: 'Education', icon: 'education', text: 'Hybrid and HyFlex classrooms, lecture halls and campus-wide distribution.' },
+	{ title: 'Medical', icon: 'medical', text: 'Visually lossless endoscopic video for operating rooms.', href: 'https://sdvoe.org/technology/use-cases/medical/' },
+	{ title: 'Live production & esports', icon: 'live', text: 'Frame-accurate switching for stages, arenas and competitive gaming.' },
+	{ title: 'Enterprise & conference rooms', icon: 'enterprise', text: 'USB, BYOD and video over a single cable to every room.' },
+	{ title: 'Defense & simulation', icon: 'defense', text: 'Glass-to-glass latency measured in hundredths of a millisecond.' },
+	{ title: 'Venues & culture', icon: 'venues', text: 'Auditoriums, opera houses and civic centers that change program nightly.' }
 ];
