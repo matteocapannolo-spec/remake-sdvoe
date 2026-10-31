@@ -24,7 +24,7 @@
 				<p class="promo-title">Free courses and certification at SDVoE Academy</p>
 				<p class="promo-sub">Video, networking and system design — self-paced.</p>
 			</div>
-			<a class="btn pill-dark" href="https://academy.sdvoe.org">Start learning</a>
+			<a class="btn pill-light" href="https://academy.sdvoe.org">Start learning</a>
 		</div>
 
 		<div class="cols">
@@ -110,13 +110,19 @@
 	.promo-sub {
 		margin-top: 2px;
 	}
-	.pill-dark {
-		background: var(--footer-pill);
-		color: #fff;
+	/* on the blue footer the action pill turns white with blue text */
+	.footer .pill-light {
+		background: #fff;
+		color: var(--primary);
 		border-radius: 100px;
 	}
-	.pill-dark:hover {
-		background: #4a4a4a;
+	.footer .pill-light:hover {
+		background: var(--primary-tint);
+		color: var(--primary-hover);
+	}
+	/* the default focus ring is Deep Blue: invisible on this background */
+	.footer :global(:focus-visible) {
+		outline-color: #fff;
 	}
 	.cols {
 		display: grid;
@@ -141,8 +147,13 @@
 		color: var(--footer-link);
 		text-decoration: none;
 	}
-	.footer a:hover {
+	.footer a:not(.btn):hover {
 		color: #fff;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.footer .social a:hover {
+		text-decoration: none;
 	}
 	.small {
 		line-height: 1.5;
@@ -157,7 +168,7 @@
 		min-width: 0;
 		height: 32px;
 		padding: 4px 0 4px 12px;
-		border: 1px solid #6c7073;
+		border: 1px solid rgb(255 255 255 / 0.7);
 		border-right: 0;
 		border-radius: var(--r-xs) 0 0 var(--r-xs);
 		background: transparent;
@@ -165,14 +176,15 @@
 		font-size: var(--fs-ui);
 	}
 	input::placeholder {
-		color: #8c8c8c;
+		color: var(--footer-placeholder);
 	}
 	form button {
 		width: 40px;
 		height: 32px;
 		border: 0;
-		background: #6c7073;
-		color: #fff;
+		border-radius: 0 var(--r-xs) var(--r-xs) 0;
+		background: #fff;
+		color: var(--primary);
 		cursor: pointer;
 	}
 	.cols .social {

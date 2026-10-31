@@ -2,7 +2,7 @@
  * SDVoE design tokens — v0.2
  * Structure, geometry and components follow DESIGN-dji.md: a white "showroom" canvas,
  * square gutter-separated tiles, every action a pill in one blue, ink at stepped opacities,
- * tight negative tracking, flat grey bands and a charcoal footer.
+ * tight negative tracking, flat grey bands and a footer in SDVoE Deep Blue.
  * Typeface: Open Sans (as DJI). Brand colours stay SDVoE blues.
  */
 :root {
@@ -36,10 +36,11 @@
 	--fog: #f5f5f5; /* product tiles, explore band */
 	--announce: #fafafa;
 	--media-black: #0b0d10;
-	--footer: #272727;
-	--footer-pill: #383838;
-	--footer-divider: #414141;
-	--footer-link: #b3b3b3;
+	/* footer on Deep Blue: only near-white text passes AA there (#e3eef8 4.9:1, white 5.7:1) */
+	--footer: var(--sdvoe-deep-blue);
+	--footer-divider: rgb(255 255 255 / 0.22);
+	--footer-link: #e3eef8;
+	--footer-placeholder: #d9e8f5; /* 4.6:1 */
 
 	/* ── Lines ── */
 	--hairline: #f0f0f0;
