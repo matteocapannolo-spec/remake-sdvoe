@@ -115,7 +115,17 @@
 	</div>
 </section>
 
-<!-- 2–3 · Grey store band: "What's Hot" cards, then the "Why" bento with the key figures -->
+<!-- 2 · Ecosystem: the members, right under the hero -->
+<section class="section">
+	<div class="section-head">
+		<h2 class="t-h2">Built by {memberCount} pro AV, IT and chip companies</h2>
+		<p class="t-lead">Every certified product works with every other, whichever brand is on the box.</p>
+	</div>
+	<div class="bleed"><LogoWall logos={allLogos} marquee /></div>
+	<p class="members-link"><a class="t-blue arrow" href={href('/alliance/#members')}>See all members</a></p>
+</section>
+
+<!-- 3–4 · Grey store band: "What's Hot" cards, then the "Why" bento with the key figures -->
 <section class="store">
 	<div class="container">
 		<h2 class="t-h2 store-head">Explore <Logotype /></h2>
@@ -125,16 +135,7 @@
 	</div>
 </section>
 
-<!-- 4 · Ecosystem -->
 <!-- from here down, sections render only when they near the screen (.defer-render) -->
-<section class="section defer-render">
-	<div class="section-head">
-		<h2 class="t-h2">Built by {memberCount} pro AV, IT and chip companies</h2>
-		<p class="t-lead">Every certified product works with every other, whichever brand is on the box.</p>
-	</div>
-	<div class="bleed"><LogoWall logos={allLogos} marquee /></div>
-	<p class="members-link"><a class="t-blue arrow" href={href('/alliance/#members')}>See all members</a></p>
-</section>
 
 <!-- 5 · How it works -->
 <section class="container section defer-render">

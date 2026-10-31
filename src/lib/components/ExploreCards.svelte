@@ -203,6 +203,8 @@
 		bottom: 0;
 		z-index: 1;
 		display: grid;
+		/* never wider than the card: the copy wraps instead of pushing out past the right edge */
+		grid-template-columns: minmax(0, 1fr);
 		gap: 6px;
 		padding: var(--s-xl) clamp(20px, 2vw, 28px);
 	}
@@ -230,8 +232,10 @@
 		font-size: var(--fs-ui);
 		line-height: 1.4;
 	}
+	/* fact and button side by side; on a narrow card the button drops below the fact */
 	.foot {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
 		gap: var(--s-sm);
@@ -273,7 +277,8 @@
 	.next {
 		right: max(8px, calc(var(--edge-r, var(--edge-fallback)) - 22px));
 	}
-	@media (max-width: 900px) {
+	/* two across below 1100 px: three would leave each card too narrow for its copy */
+	@media (max-width: 1100px) {
 		.track {
 			grid-auto-columns: calc((100% - 16px) / 2);
 		}

@@ -235,12 +235,27 @@
 			padding-bottom: var(--s-xl);
 			border-bottom: 1px solid var(--footer-divider);
 		}
-		.subscribe > * {
-			width: 100%;
+		.sub-intro {
 			max-width: 480px;
 		}
+		/* field and social icons on one line, the icons right after the field */
+		.subscribe {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.sub-action {
+			display: flex;
+			align-items: center;
+			gap: var(--s-sm);
+			min-width: 0;
+		}
 		.subscribe form {
+			flex: 0 1 400px;
+			min-width: 0;
 			margin-top: 0;
+		}
+		.cols .social {
+			flex: none;
+			margin: 0;
 		}
 		.legal {
 			grid-template-columns: auto 1fr;
