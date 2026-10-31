@@ -275,9 +275,10 @@ export const news = [
 	}
 ];
 
+// bg: photo behind the card (images-src/); the show logos are mapped in routes/news/+page.svelte
 export const events = [
-	{ name: 'ISE 2027', place: 'Fira Barcelona Gran Via, Spain', date: 'February 2–5, 2027', status: 'SDVoE booth: to be announced' },
-	{ name: 'InfoComm 2027', place: 'Orange County Convention Center, Orlando', date: 'Exhibits June 16–18, 2027', status: 'SDVoE booth: to be announced' }
+	{ name: 'ISE 2027', logo: 'ise', bg: 'event-ise-bg.jpg', place: 'Fira Barcelona Gran Via, Spain', date: 'February 2–5, 2027', status: 'SDVoE booth: to be announced' },
+	{ name: 'InfoComm 2027', logo: 'infocomm', bg: 'event-infocomm-bg.jpg', place: 'Orange County Convention Center, Orlando', date: 'Exhibits June 16–18, 2027', status: 'SDVoE booth: to be announced' }
 ];
 
 export const formatDate = (iso) =>

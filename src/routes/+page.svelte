@@ -1,5 +1,6 @@
 <script>
 	import Seo from '$lib/components/Seo.svelte';
+	import Logotype from '$lib/components/Logotype.svelte';
 	import HowItWorks from '$lib/components/HowItWorks.svelte';
 	import LogoWall from '$lib/components/LogoWall.svelte';
 	import CaseCard from '$lib/components/CaseCard.svelte';
@@ -117,9 +118,9 @@
 <!-- 2–3 · Grey store band: "What's Hot" cards, then the "Why" bento with the key figures -->
 <section class="store">
 	<div class="container">
-		<h2 class="t-h2 store-head">Explore SDVoE</h2>
+		<h2 class="t-h2 store-head">Explore <Logotype /></h2>
 		<ExploreCards {cards} />
-		<h2 class="t-h2 store-head why-head">Why SDVoE</h2>
+		<h2 class="t-h2 store-head why-head">Why <Logotype /></h2>
 		<WhyBento />
 	</div>
 </section>
@@ -128,9 +129,11 @@
 <!-- from here down, sections render only when they near the screen (.defer-render) -->
 <section class="section defer-render">
 	<div class="section-head">
-		<p class="eyebrow">Built by {memberCount} pro AV, IT and chip companies</p>
+		<h2 class="t-h2">Built by {memberCount} pro AV, IT and chip companies</h2>
+		<p class="t-lead">Every certified product works with every other, whichever brand is on the box.</p>
 	</div>
 	<div class="bleed"><LogoWall logos={allLogos} marquee /></div>
+	<p class="members-link"><a class="t-blue arrow" href={href('/alliance/#members')}>See all members</a></p>
 </section>
 
 <!-- 5 · How it works -->
@@ -294,9 +297,13 @@
 		/* the Explore row runs to the window edges: never let it widen the page */
 		overflow-x: clip;
 	}
+	.members-link {
+		margin-top: var(--s-xl);
+		text-align: center;
+	}
 	.store-head {
 		margin-bottom: var(--s-xl);
-		text-align: left;
+		text-align: center;
 	}
 	.why-head {
 		margin: var(--s-section) 0 var(--s-xl);

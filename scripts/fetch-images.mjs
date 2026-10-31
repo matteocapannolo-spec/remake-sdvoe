@@ -22,10 +22,16 @@ const ORIGIN = process.env.IMG_ORIGIN || 'https://sdvoe.org/wp-content/uploads/'
 const args = process.argv.slice(2);
 const FROM = args.includes('--from') ? args[args.indexOf('--from') + 1] : null;
 const FORCE = args.includes('--force');
+// --only name.jpg: (re)convert just that image, e.g. after adding it to `trim`
+const ONLY = args.includes('--only') ? args[args.indexOf('--only') + 1] : null;
 
 // Size rules: logos stay small, photos and diagrams get a generous width for retina.
 // Full-bleed hero backgrounds get more pixels for wide retina screens.
-const widthFor = (name) => (/^logo|avixa/.test(name) ? 360 : /^hero/.test(name) ? 2400 : 1600);
+const widthFor = (name) => (/^logo|avixa|-logo./.test(name) ? 360 : /^hero/.test(name) ? 2400 : 1600);
+// Originals with a dark frame baked into the file: pixels to cut from every side (at the original size)
+const trim = {
+	'case-study-virginia-senate-00.jpg': 2
+};
 const qualityFor = (name) => (/diagram|drawing|timeline|logo/.test(name) ? 82 : 72);
 
 async function walk(dir) {
@@ -61,20 +67,26 @@ async function load(name) {
 
 async function main() {
 	await mkdir(OUT, { recursive: true });
-	const names = await collectNames();
+	const names = ONLY ? [ONLY] : await collectNames();
 	console.log(`Found ${names.length} images referenced in the source.\n`);
 	let done = 0, skipped = 0, failed = [];
 	let before = 0, after = 0;
 	for (const name of names) {
 		const target = join(OUT, basename(name, extname(name)) + '.webp');
-		if (!FORCE && (await exists(target))) {
+		if (!FORCE && !ONLY && (await exists(target))) {
 			skipped++;
 			continue;
 		}
 		try {
 			const input = await load(name);
 			// No flatten: PNGs keep their transparency (the white logo sits on dark surfaces)
-			const out = await sharp(input)
+			let img = sharp(input);
+			if (trim[name]) {
+				const { width, height } = await img.metadata();
+				const t = trim[name];
+				img = sharp(input).extract({ left: t, top: t, width: width - 2 * t, height: height - 2 * t });
+			}
+			const out = await img
 				.resize({ width: widthFor(name), withoutEnlargement: true })
 				.webp({ quality: qualityFor(name) })
 				.toBuffer();
