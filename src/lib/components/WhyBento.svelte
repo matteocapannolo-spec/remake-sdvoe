@@ -1,15 +1,53 @@
 <script>
 	// DJI "Why shop with DJI Store" bento: white cards on the grey band, title on top,
 	// one big graphic below. Figures come from `stats` in site.js, the AI card from ai.js.
-	import Img from '$lib/components/Img.svelte';
 	import AiIcon from '$lib/components/AiIcon.svelte';
 	import { Plus } from '@lucide/svelte';
 	import { stats, img, localImg } from '$lib/content/site.js';
 	import { aiPoints, agentPlatforms } from '$lib/content/ai.js';
 	import { href } from '$lib/link.js';
+	import scadaVideo from '$lib/assets/video/instaswitch-scada.mp4?url';
+	import cityVideo from '$lib/assets/video/instaswitch-city.mp4?url';
 
 	const [latency, video, products] = stats;
 	const aiBackdrop = localImg('ai-band-bg.jpg');
+
+	// InstaSwitch monitor: both clips play only while the card is on screen (nothing loads before),
+	// so the hover switch is instant. Without hover (touch screens) the source switches by
+	// itself every 3 s. Reduced motion: no playback, the posters still switch on hover.
+	// The posters are set only when the card gets near the screen: a poster attribute downloads
+	// straight away, and they would compete with the hero photo for bandwidth.
+	let instaCard;
+	let videoA;
+	let videoB;
+	let altSource = $state(false);
+	let near = $state(false);
+	$effect(() => {
+		const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const touch = matchMedia('(hover: none)').matches;
+		let timer;
+		const soon = new IntersectionObserver(([e]) => {
+			if (e.isIntersecting) {
+				near = true;
+				soon.disconnect();
+			}
+		}, { rootMargin: '600px 0px' });
+		soon.observe(instaCard);
+		const io = new IntersectionObserver(([e]) => {
+			for (const v of [videoA, videoB]) {
+				if (e.isIntersecting && !still) v.play().catch(() => {});
+				else v.pause();
+			}
+			clearInterval(timer);
+			if (e.isIntersecting && touch) timer = setInterval(() => (altSource = !altSource), 3000);
+		}, { threshold: 0.3 });
+		io.observe(instaCard);
+		return () => {
+			soon.disconnect();
+			io.disconnect();
+			clearInterval(timer);
+		};
+	});
 </script>
 
 <div class="bento">
@@ -50,17 +88,29 @@
 	<!-- DJI store card: title on top, a cut-out product photo running off the bottom-right edge -->
 	<a class="cell photo" href={href('/solutions#applications')}>
 		<h3 class="title">Video walls & multiview built in</h3>
-		<Img src={img('why-video-wall.png')} alt="" loading="lazy" width="720" height="712">{#snippet fallback()}{/snippet}</Img>
+		<!-- three stacked layers cut from one photo (images-src/why-video-wall*.png): the wall,
+		     and the two detached panels, which lift further on hover -->
+		<span class="wall" aria-hidden="true">
+			<img class="base" src={img('why-video-wall-base.png')} alt="" loading="lazy" width="720" height="712" />
+			<img class="piece p2" src={img('why-video-wall-panel-2.png')} alt="" loading="lazy" width="720" height="712" />
+			<img class="piece p3" src={img('why-video-wall-panel-3.png')} alt="" loading="lazy" width="720" height="712" />
+		</span>
 	</a>
 
-	<a class="cell" href={href('/technology')}>
+	<!-- InstaSwitch: a monitor playing a control-room feed; on hover the source switches to a city
+	     feed in the same frame, with no fade (that is the point). Clips: Pexels, free licence. -->
+	<a class="cell insta" class:alt={altSource} href={href('/technology')} bind:this={instaCard}>
 		<h3 class="title">InstaSwitch: no glitch on change</h3>
-		<svg class="glyph" viewBox="0 0 160 80" aria-hidden="true">
-			<rect x="8" y="14" width="56" height="40" rx="3" fill="#3a3f46" />
-			<rect x="96" y="14" width="56" height="40" rx="3" fill="#0c67ba" />
-			<path d="M70 34h18m-7-8 8 8-8 8" fill="none" stroke="#31a3e3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-			<path d="M28 66h16M116 66h16" stroke="#d9d9d9" stroke-width="4" stroke-linecap="round" />
-		</svg>
+		<!-- the area left under the title; the monitor hangs from its top edge, so it never reaches the text -->
+		<span class="monitor-area" aria-hidden="true">
+			<span class="monitor">
+				<span class="screen">
+					<video class="src-a" bind:this={videoA} src={scadaVideo} poster={near ? img('instaswitch-scada-poster.jpg') : undefined} muted loop playsinline preload="none" width="640" height="360"></video>
+					<video class="src-b" bind:this={videoB} src={cityVideo} poster={near ? img('instaswitch-city-poster.jpg') : undefined} muted loop playsinline preload="none" width="640" height="360"></video>
+				</span>
+				<img class="bezel" src={img('instaswitch-monitor.png')} alt="" loading="lazy" width="640" height="566" />
+			</span>
+		</span>
 	</a>
 
 	<!-- AI Ready: the three agentic-AI points take turns, then the platforms it works with slide
@@ -107,9 +157,13 @@
 		text-align: center;
 		text-decoration: none;
 		grid-row: span 3;
+		transition: box-shadow 0.3s ease;
 	}
-	.cell:hover .title {
-		color: var(--primary);
+	/* DJI store: the card lifts off the grey band with a soft shadow (titles keep their colour) */
+	.cell:hover {
+		box-shadow:
+			0 8px 20px rgb(0 0 0 / 0.12),
+			0 2px 4px rgb(0 0 0 / 0.08);
 	}
 	.latency {
 		grid-column: 1;
@@ -134,7 +188,7 @@
 		font-weight: var(--w-bold);
 		letter-spacing: var(--track-body);
 		line-height: 1.25;
-		transition: color 0.15s ease;
+		color: var(--sdvoe-deep-blue);
 	}
 	.big {
 		margin-block: auto;
@@ -190,20 +244,102 @@
 		position: relative;
 		z-index: 1;
 	}
-	.photo :global(img) {
+	.wall {
 		position: absolute;
 		left: -6%;
 		/* just under the title (two lines on desktop, up to three on phones) */
 		top: max(22%, 62px);
 		width: 112%;
-		height: auto;
-		max-width: none;
+		aspect-ratio: 720 / 712;
 		rotate: -4deg;
+		pointer-events: none;
+		/* one shadow for the composed layers (a filter on each overlapping layer paints wrong
+		   in Chrome); it is worked out from the layers' current positions, so it follows the
+		   panels as they move */
 		filter: drop-shadow(0 12px 14px rgb(0 0 0 / 0.22)) drop-shadow(0 2px 3px rgb(0 0 0 / 0.12));
-		transition: translate 0.4s ease;
 	}
-	.photo:hover :global(img) {
+	.wall img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		max-width: none;
+		transition: translate 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+	/* on hover the wall rises a little and the detached panels pull away from it, the farther
+	   one the most */
+	.photo:hover .base {
 		translate: 0 -6px;
+	}
+	.photo:hover .p2 {
+		translate: 6px -16px;
+	}
+	.photo:hover .p3 {
+		translate: 12px -26px;
+	}
+	/* ── InstaSwitch monitor: the clips sit behind the bezel image, in its (transparent) screen.
+	   Screen position measured on the artwork: 3.28% / 3.93%, 93.44% × 55.68% of the image. */
+	/* large and cropped by the card's bottom edge, like the LED wall: the stand runs off the card */
+	.insta {
+		position: relative;
+		overflow: hidden;
+	}
+	/* fills the card below the title (and the gap after it) without adding height of its own */
+	.monitor-area {
+		position: relative;
+		display: block;
+		flex: 1 1 0;
+		align-self: stretch;
+		min-height: 0;
+	}
+	/* The card's bottom edge (the area plus the card's bottom padding, --pad-b) always cuts the
+	   monitor at 90% of its height, half-way down the stand. It is as tall as the room under the
+	   title allows, but never wider than the card; when the width is what limits it (narrow
+	   cards), it moves down so the cut stays on the stand. */
+	.insta {
+		--pad-b: var(--s-xl);
+	}
+	.monitor-area {
+		container-type: size;
+	}
+	.monitor {
+		--h: min(calc((100cqh + var(--pad-b)) / 0.9), calc(100cqw * 566 / 640));
+		position: absolute;
+		top: calc(100cqh + var(--pad-b) - 0.9 * var(--h));
+		left: 50%;
+		display: block;
+		height: var(--h);
+		aspect-ratio: 640 / 566;
+		translate: -50% 0;
+	}
+	.screen {
+		position: absolute;
+		left: 3.28%;
+		top: 3.93%;
+		width: 93.44%;
+		height: 55.68%;
+		overflow: hidden;
+		background: #0b0d10;
+	}
+	.screen video {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	/* the switch: no transition on purpose — instant, like the real thing */
+	.src-b {
+		visibility: hidden;
+	}
+	.insta:hover .src-b,
+	.insta.alt .src-b {
+		visibility: visible;
+	}
+	.bezel {
+		position: relative;
+		width: 100%;
+		height: auto;
 	}
 	.note {
 		font-size: var(--fs-ui);
@@ -419,6 +555,9 @@
 			padding: var(--s-md) var(--s-sm);
 			gap: var(--s-sm);
 		}
+		.insta {
+			--pad-b: var(--s-md);
+		}
 		.title {
 			font-size: var(--fs-body);
 		}
@@ -438,7 +577,7 @@
 		.photo {
 			min-height: 200px;
 		}
-		.photo :global(img) {
+		.wall {
 			top: 48px;
 		}
 		.big {

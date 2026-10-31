@@ -128,8 +128,11 @@
 		margin: 0;
 		padding-inline: var(--edge-l, var(--edge-fallback)) var(--edge-r, var(--edge-fallback));
 		scroll-padding-inline: var(--edge-l, var(--edge-fallback)) var(--edge-r, var(--edge-fallback));
-		/* room for the objects that overhang the cards */
-		padding-top: var(--overhang);
+		/* room for the objects that overhang the cards, and below for the hover shadow (a
+		   scrolling row clips whatever leaves it; the negative margin gives the space back) */
+		padding-top: calc(var(--overhang) + 16px);
+		padding-bottom: 32px;
+		margin-block: -16px -32px;
 		overflow-x: auto;
 		scroll-snap-type: x mandatory;
 		scrollbar-width: none;
@@ -150,6 +153,13 @@
 		overflow: hidden;
 		border-radius: var(--r-sm);
 		background: var(--bg);
+		transition: box-shadow 0.3s ease;
+	}
+	/* DJI store: a soft shadow lifts the card on hover */
+	.card:hover .surface {
+		box-shadow:
+			0 10px 22px rgb(0 0 0 / 0.22),
+			0 2px 5px rgb(0 0 0 / 0.1);
 	}
 	.surface :global(img) {
 		width: 100%;
