@@ -1,11 +1,15 @@
 <script>
 	// DJI "Why shop with DJI Store" bento: white cards on the grey band, title on top,
-	// one big graphic below. Figures come from `stats` and `members` in site.js.
+	// one big graphic below. Figures come from `stats` in site.js, the AI card from ai.js.
 	import Img from '$lib/components/Img.svelte';
-	import { stats, members, img } from '$lib/content/site.js';
+	import AiIcon from '$lib/components/AiIcon.svelte';
+	import { Plus } from '@lucide/svelte';
+	import { stats, img, localImg } from '$lib/content/site.js';
+	import { aiPoints, agentPlatforms } from '$lib/content/ai.js';
 	import { href } from '$lib/link.js';
 
-	const [latency, video, products, memberStat] = stats;
+	const [latency, video, products] = stats;
+	const aiBackdrop = localImg('ai-band-bg.jpg');
 </script>
 
 <div class="bento">
@@ -59,14 +63,27 @@
 		</svg>
 	</a>
 
-	<a class="cell members" href={href('/alliance#members')}>
-		<h3 class="title">{memberStat.value} {memberStat.label.toLowerCase()}</h3>
-		<ul role="list" class="logos">
-			{#each members.steering as [name, file]}
-				<li><Img src={img(file)} alt={name} loading="lazy" width="140" height="60">{#snippet fallback()}<span>{name}</span>{/snippet}</Img></li>
+	<!-- AI Ready: the three agentic-AI points take turns, then the platforms it works with slide
+	     past one at a time (CSS only; the full text of the points is on Developers) -->
+	<a class="cell members ai-ready" href={href('/developers#ai')}>
+		{#if aiBackdrop}<img class="ai-bg" src={aiBackdrop} alt="" loading="lazy" width="1600" height="1600" />{/if}
+		<h3 class="title">AI Ready</h3>
+		<ul role="list" class="ai-points">
+			{#each aiPoints as p, i}
+				<li style={`--i:${i}`}>
+					<AiIcon icon={p.icon} size={48} delay={i * 0.9} />
+					<p class="ai-title">{p.title}</p>
+				</li>
 			{/each}
 		</ul>
-		<p class="note">Steering members</p>
+		<span class="ai-dots" aria-hidden="true">{#each aiPoints as _, i}<span style={`--i:${i}`}></span>{/each}</span>
+		<p class="works">Works with</p>
+		<ul role="list" class="agents">
+			{#each agentPlatforms as a, i}
+				<li style={`--i:${i}`}><img src={a.logo} alt="" width="16" height="16" />{a.name}</li>
+			{/each}
+			<li class="more" style={`--i:${agentPlatforms.length}`}><Plus size={14} strokeWidth={2} aria-hidden="true" /><span class="long">Other agent platforms</span><span class="short" aria-hidden="true">Others</span></li>
+		</ul>
 	</a>
 </div>
 
@@ -192,20 +209,181 @@
 		font-size: var(--fs-ui);
 		color: var(--ink-secondary);
 	}
-	.logos {
-		display: grid;
+	/* ── AI Ready ── same blurred backdrop and light veil as the AI band on Developers */
+	.ai-ready {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
 		gap: var(--s-sm);
-		justify-items: center;
-		margin: auto 0;
+		/* narrower side padding so the pills sit two to a row and the card stays compact */
+		padding-inline: var(--s-md);
+	}
+	.ai-bg {
+		position: absolute;
+		inset: 0;
+		z-index: -2;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.ai-ready::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: rgb(247 248 251 / 0.72);
+	}
+	/* the three points share one spot and take turns: 4 s each, 12 s per cycle */
+	.ai-points {
+		display: grid;
+		flex: 1;
+		align-items: center;
+		width: 100%;
+		margin: 0;
 		padding: 0;
 	}
-	.logos :global(img) {
-		max-height: 36px;
-		width: auto;
-		mix-blend-mode: multiply;
+	.ai-points li {
+		grid-area: 1 / 1;
+		display: grid;
+		justify-items: center;
+		gap: 6px;
+		opacity: 0;
+		animation: ai-turn 12s ease-in-out calc(var(--i) * 4s) infinite;
 	}
-	.logos span {
+	.ai-points :global(.ai-icon) {
+		margin-bottom: 6px;
+	}
+	.ai-title {
+		font-size: var(--fs-body);
 		font-weight: var(--w-bold);
+		line-height: 1.25;
+	}
+	@keyframes ai-turn {
+		0% {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+		5%,
+		29% {
+			opacity: 1;
+			transform: none;
+		}
+		34%,
+		100% {
+			opacity: 0;
+			transform: translateY(-14px);
+		}
+	}
+	.ai-dots {
+		display: flex;
+		gap: 6px;
+	}
+	.ai-dots span {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--primary);
+		opacity: 0.25;
+		animation: ai-dot 12s ease-in-out calc(var(--i) * 4s) infinite;
+	}
+	@keyframes ai-dot {
+		0%,
+		34%,
+		100% {
+			opacity: 0.25;
+			transform: none;
+		}
+		5%,
+		29% {
+			opacity: 1;
+			transform: scale(1.3);
+		}
+	}
+	.works {
+		margin-top: var(--s-xs);
+		font-size: var(--fs-caption);
+		font-weight: var(--w-bold);
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--ink-secondary);
+	}
+	/* one pill at a time: each slides in from the right, holds, slides out to the left.
+	   4 pills × 2 s = 8 s per cycle; the strip's edges fade so they enter and leave softly */
+	.agents {
+		display: grid;
+		justify-items: center;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent);
+	}
+	.agents li {
+		grid-area: 1 / 1;
+		opacity: 0;
+		animation: pill-slide 8s cubic-bezier(0.4, 0, 0.2, 1) calc(var(--i) * 2s) infinite;
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		min-height: 30px;
+		padding: 4px 12px 4px 9px;
+		border: 1px solid var(--divider);
+		border-radius: var(--r-full);
+		background: var(--canvas);
+		font-size: var(--fs-caption);
+		font-weight: var(--w-medium);
+		white-space: nowrap;
+	}
+	.agents img {
+		width: 16px;
+		height: 16px;
+	}
+	.agents .more {
+		border-style: dashed;
+		border-color: var(--steel);
+		background: rgb(255 255 255 / 0.6);
+		color: var(--ink-secondary);
+	}
+	/* "Others" only where the card is too narrow for the full label (phones) */
+	.more .short {
+		display: none;
+	}
+	@keyframes pill-slide {
+		0% {
+			opacity: 0;
+			transform: translateX(90px);
+		}
+		5%,
+		20% {
+			opacity: 1;
+			transform: none;
+		}
+		25%,
+		100% {
+			opacity: 0;
+			transform: translateX(-90px);
+		}
+	}
+	/* reduced motion: the first point stays put, the pills sit side by side */
+	@media (prefers-reduced-motion: reduce) {
+		.ai-points li,
+		.ai-dots span {
+			animation: none;
+		}
+		.ai-points li:first-child {
+			opacity: 1;
+		}
+		.agents {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 6px;
+			mask-image: none;
+		}
+		.agents li {
+			opacity: 1;
+			animation: none;
+		}
 	}
 	@media (max-width: 900px) {
 		.bento {
@@ -220,17 +398,13 @@
 			grid-row: auto;
 			min-height: 200px;
 		}
-		.latency,
-		.members {
+		/* latency on its own row, then the other six two by two: no card left alone */
+		.latency {
 			grid-column: 1 / -1;
 		}
 		/* wide, short cards here: room for the photo below the title */
 		.photo {
 			min-height: 270px;
-		}
-		.logos {
-			grid-template-columns: repeat(3, auto);
-			gap: var(--s-md) var(--s-xl);
 		}
 	}
 	@media (max-width: 480px) {
@@ -247,6 +421,18 @@
 		}
 		.title {
 			font-size: var(--fs-body);
+		}
+		/* half-width AI card: short label on screen, full label still read out */
+		.more .long {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			overflow: hidden;
+			clip-path: inset(50%);
+			white-space: nowrap;
+		}
+		.more .short {
+			display: inline;
 		}
 		/* taller, so the photo shows more than its top edge (the row's other card grows with it) */
 		.photo {

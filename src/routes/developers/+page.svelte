@@ -2,6 +2,13 @@
 	import Seo from '$lib/components/Seo.svelte';
 	import PageHero from '$lib/components/PageHero.svelte';
 	import { href } from '$lib/link.js';
+	import { localImg } from '$lib/content/site.js';
+	import { Plus } from '@lucide/svelte';
+	import AiIcon from '$lib/components/AiIcon.svelte';
+	import { aiPoints as ai, agentPlatforms as agents } from '$lib/content/ai.js';
+
+	// AI band backdrop: blurred at conversion (images-src/ai-band-bg.jpg), lightened by a veil in CSS
+	const aiBackdrop = localImg('ai-band-bg.jpg');
 
 	const build = [
 		{ title: 'Switching and routing', text: 'Route video, audio, USB, RS-232 and IR independently, between any endpoints, from any vendor.' },
@@ -10,12 +17,6 @@
 		{ title: 'Control interfaces', text: 'Touch panels, web UIs and room controllers on top of one consistent command set.' },
 		{ title: 'Monitoring', text: 'Discover devices, read status and catch problems before users do.' },
 		{ title: 'Platform integrations', text: 'Bring SDVoE systems into management platforms — AVI-SPL Symphony already uses the SDVoE API.' }
-	];
-
-	const ai = [
-		{ title: 'Natural-language control', text: 'Describe what you want — "send the lectern laptop to the left wall" — and an agent turns intent into valid API calls.' },
-		{ title: 'Faster deployment', text: 'Agents generate system configurations, integrations and control UIs in minutes instead of days.' },
-		{ title: 'Assisted troubleshooting', text: 'Diagnostics, one of the slowest parts of AV-over-IP support, become a conversation with the system.' }
 	];
 </script>
 
@@ -65,25 +66,34 @@ verify   wall=left  → 2 windows, 0 ms switch</code></pre>
 </section>
 
 <section id="ai" class="ai-band section">
+	{#if aiBackdrop}<img class="ai-photo" src={aiBackdrop} alt="" loading="lazy" width="1600" height="1600" />{/if}
 	<div class="container">
 		<div class="section-head">
 			<p class="tier">New in 2026</p>
 			<h2 class="t-h2">Ready for AI agents.</h2>
 			<p class="t-lead">The SDVoE API now supports agentic, AI-assisted workflows. Combined with MCP servers and Agent Skills, systems can be designed, deployed, monitored and fixed through natural-language prompts and automated tools.</p>
 		</div>
-		<div class="grid grid-3">
-			{#each ai as a}
-				<div class="explore-card">
-					<h3 class="t-h4">{a.title}</h3>
-					<p class="t-body t-muted">{a.text}</p>
+		<div class="grid ai-cards">
+			{#each ai as a, i}
+				<div class="explore-card ai-card">
+					<AiIcon icon={a.icon} delay={i * 0.9} />
+					<div class="ai-copy">
+						<h3 class="t-title">{a.title}</h3>
+						<p class="t-body t-muted">{a.text}</p>
+					</div>
 				</div>
 			{/each}
 		</div>
 		<div class="proof">
 			<p class="eyebrow">Already shipping</p>
-			<p class="t-body">
-				<strong>DVIGear DisplayNet Connect for AI Agents</strong> is an MCP server built on SDVoE that works with Claude, OpenAI Codex, Gemini CLI and other agent platforms to configure, control and troubleshoot DisplayNet systems.
-			</p>
+			<p class="t-body"><strong>DVIGear DisplayNet Connect for AI Agents</strong> is an MCP server built on SDVoE that works with:</p>
+			<ul role="list" class="agents">
+				{#each agents as a}
+					<li><img src={a.logo} alt="" width="20" height="20" />{a.name}</li>
+				{/each}
+				<li class="more"><Plus size={16} strokeWidth={2} aria-hidden="true" />Other agent platforms</li>
+			</ul>
+			<p class="t-body">to configure, control and troubleshoot DisplayNet systems.</p>
 			<div class="btn-row">
 				<a class="link" href="https://sdvoe.org/news/press-releases/sdvoe-alliance-expands-api-capabilities-for-agentic-ai-assisted-av-over-ip-workflows/">Read the announcement</a>
 				<a class="link" href="https://sdvoe.org/news/press-releases/dvigear-introduces-displaynet-connect-for-ai-agents-bringing-natural-language-control-to-professional-av-over-ip-systems/">DVIGear DisplayNet Connect</a>
@@ -171,7 +181,45 @@ verify   wall=left  → 2 windows, 0 ms switch</code></pre>
 		font-weight: var(--w-bold);
 	}
 	.ai-band {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
 		background: var(--fog);
+	}
+	/* light photo, so a light veil rather than a dark one. A soft glow behind each text block
+	   (heading, proof) lifts even the photo's darkest spots enough for AA contrast; the white
+	   cards need nothing. */
+	.ai-photo {
+		position: absolute;
+		inset: 0;
+		z-index: -2;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.ai-band::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: rgb(245 246 250 / 0.45);
+	}
+	.ai-band .section-head,
+	.proof {
+		position: relative;
+		isolation: isolate;
+	}
+	.ai-band .section-head::before,
+	.proof::before {
+		content: '';
+		position: absolute;
+		inset: -16% -12%;
+		z-index: -1;
+		background: radial-gradient(closest-side, rgb(247 248 251 / 0.9) 62%, rgb(247 248 251 / 0));
+	}
+	/* the default eyebrow grey is too light for a photo backdrop */
+	.proof .eyebrow {
+		color: var(--ink-secondary);
 	}
 	.explore-card {
 		display: grid;
@@ -180,12 +228,79 @@ verify   wall=left  → 2 windows, 0 ms switch</code></pre>
 		padding: var(--s-xxl);
 		background: var(--canvas);
 	}
+	/* three cards of the same size: one row of three on wide screens, a column below 1024px
+	   (two across left the third card on its own) */
+	.ai-cards {
+		grid-template-columns: repeat(3, 1fr);
+		grid-auto-rows: 1fr;
+	}
+	/* icon beside the whole text block, not just the title */
+	.ai-card {
+		grid-template-columns: auto 1fr;
+		align-items: start;
+		gap: var(--s-lg);
+		padding: var(--s-xl);
+	}
+	.ai-copy {
+		display: grid;
+		gap: var(--s-sm);
+		/* the icon sits beside the text: keep "Natural-language" on one line */
+		padding-top: 4px;
+	}
+	@media (min-width: 481px) {
+		.ai-copy .t-title {
+			text-wrap: nowrap;
+		}
+	}
+	@media (max-width: 1023px) {
+		.ai-cards {
+			grid-template-columns: 1fr;
+		}
+	}
+	@media (max-width: 480px) {
+		.ai-card {
+			gap: var(--s-md);
+			padding: var(--s-lg);
+		}
+	}
 	.proof {
 		display: grid;
 		gap: var(--s-sm);
 		max-width: 760px;
 		margin: var(--s-xxxl) auto 0;
 		text-align: center;
+	}
+	/* platform chips: small labels, so pill corners are allowed */
+	.agents {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: var(--s-sm);
+		margin: var(--s-xs) 0;
+		padding: 0;
+	}
+	.agents li {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		min-height: 40px;
+		padding: 6px 16px 6px 12px;
+		border: 1px solid var(--divider);
+		border-radius: var(--r-full);
+		background: var(--canvas);
+		color: var(--ink);
+		font-size: var(--fs-ui);
+		font-weight: var(--w-medium);
+	}
+	.agents img {
+		width: 20px;
+		height: 20px;
+	}
+	.agents .more {
+		border-style: dashed;
+		border-color: var(--steel);
+		background: rgb(255 255 255 / 0.6);
+		color: var(--ink-secondary);
 	}
 	.proof strong {
 		font-weight: var(--w-bold);
