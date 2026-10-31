@@ -8,6 +8,7 @@ SvelteKit 2 + Svelte 5, generato in HTML statico. Il documento di progetto (obie
 npm install
 npm run import   # una volta: importa casi studio e board of directors dall'API WordPress
 npm run images   # una volta: scarica e ottimizza le immagini da sdvoe.org (vedi sotto)
+npm run tint     # ricolora nei blu SDVoE gli sfondi delle card "Explore" (da images-src/)
 npm run dev      # http://localhost:5173
 npm run build    # sito statico in /build
 npm run preview  # serve /build in locale
@@ -59,8 +60,10 @@ Le immagini dei contenuti (loghi, foto dei casi studio, schemi) si richiamano pe
 
 `npm run images` trova da solo tutti i nomi usati nel codice, li scarica, li converte in WebP (loghi a 360 px, foto e schemi a 1600 px) e li salva in `src/lib/assets/img/`. Opzioni:
 
-- `npm run images -- --from ./cartella` per convertire file che hai già. Le immagini fornite per il sito (per ora gli sfondi delle card "Explore" in home) stanno in `images-src/`: si convertono con `npm run images -- --from images-src`;
+- `npm run images -- --from ./cartella` per convertire file che hai già. Le immagini fornite per il sito stanno in `images-src/` (originali, non toccati) e si convertono con `npm run images -- --from images-src`;
 - `npm run images -- --force` per riscaricare tutto.
+
+Gli sfondi delle quattro card "Explore SDVoE" non si usano con i colori originali: `npm run tint` (`scripts/brand-tint.mjs`) tiene la luminosità di ogni pixel (luci, riflessi, volume) e ne sostituisce solo tinta e saturazione con quelle di una rampa SDVoE (blu notte nelle ombre → Deep Blue nei toni medi → Sky Blue verso le luci → bianco ghiaccio), così foto diverse sembrano un unico set. I calcoli sono in virgola mobile sull'originale a colori, con un leggero dithering per non creare bande nelle sfumature. Se `npm run images -- --force` li rigenera, rilanciare `npm run tint`. Per aggiungere una card basta mettere l'originale in `images-src/` e il nome nell'elenco `FILES` dello script.
 
 Dopo questo passaggio il sito non dipende più da sdvoe.org. Se un'immagine non si carica, i componenti mostrano un segnaposto (nome del membro in testo, riquadro scuro per le foto) invece dell'icona dell'immagine rotta.
 

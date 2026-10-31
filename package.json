@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "images": "node scripts/fetch-images.mjs",
+    "tint": "node scripts/brand-tint.mjs",
     "import": "node scripts/import-content.mjs"
   },
   "devDependencies": {
