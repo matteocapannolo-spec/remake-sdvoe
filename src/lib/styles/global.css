@@ -98,6 +98,15 @@ textarea {
 	line-height: 1.15;
 	letter-spacing: var(--track-heading);
 }
+/* section titles in the brand's Deep Blue (5.7:1 on white); white again on dark surfaces */
+.t-h2,
+.section-head h2 {
+	color: var(--sdvoe-deep-blue);
+}
+.on-dark .t-h2,
+.on-dark .section-head h2 {
+	color: #fff;
+}
 .t-h3 {
 	font-size: var(--fs-heading);
 	line-height: 1.15;

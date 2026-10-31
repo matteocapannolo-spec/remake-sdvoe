@@ -77,7 +77,7 @@ Base: **DESIGN-dji.md**, cioè uno "showroom": fondo bianco, riquadri squadrati 
 - Livelli di adesione come le schede "opzione" dello store DJI: angoli da 8 px, bordo blu da 2 px sulla scheda consigliata, badge blu nell'angolo.
 - FAQ a righe separate da un filo. Fascia finale con tre collegamenti (prodotti, aiuto alla progettazione, prossima fiera). Footer antracite con promozione dell'Academy, iscrizione alla newsletter e colonne di link. Pulsante "torna su" galleggiante.
 
-**Regole:** niente angoli arrotondati su riquadri e card (solo pillole, schede opzione, etichette e le card in stile store della home). Niente ombre, tranne pannello del menu e pulsante "torna su". Niente arancione: gli accenti sono solo i due blu SDVoE. Testo mai nero puro.
+**Regole:** niente angoli arrotondati su riquadri e card (solo pillole, schede opzione, etichette e le card in stile store della home). Niente ombre, tranne pannello del menu, pulsante "torna su", hover delle card in stile store della home (come su DJI) e immagini scontornate che sporgono. Niente arancione: gli accenti sono solo i due blu SDVoE (unica eccezione: i colori della ruota "Power of 10+" sull'icona di "Why SDVoE" nel menu). Testo mai nero puro.
 
 **Fotografia.** Il sistema DJI vive di foto di prodotto. Nel draft i riquadri usano disegni vettoriali provvisori. Per la fase 1 servono foto da studio dei prodotti dei membri (su fondo grigio chiaro) e foto delle installazioni per i casi studio.
 
@@ -155,6 +155,11 @@ Aggiornato il 30 ottobre 2026. Nel codice i punti ancora aperti sono segnati com
 14. **Casi studio video.** Due casi studio sono in pratica dei video: "Connext Sriracha: video case study" (AV LINK, video incorporato nella pagina) e "Quadram Institute" (rimanda a un video sull'Academy). L'import non porta i video, quindi le due pagine sono brevi. Da decidere: incorporare i video (serve sapere dove sono ospitati) o unire il primo all'altro caso studio di Connext Sriracha.
 15. **Profili "About" dei membri.** L'import toglie da ogni caso studio le sezioni ripetute "About Christie", "About NETGEAR" ecc. e i "For more information… visit" verso i siti dei membri. Restano i crediti fotografici. Se l'alleanza vuole un link al membro su ogni caso, va aggiunto nel riquadro laterale ("Solution from"), non nel testo.
 16. **Lingue.** Il selettore in alto elenca 9 lingue ma per decisione del 30 ottobre è solo interfaccia: non esistono traduzioni e il clic non fa nulla, nemmeno per il giapponese (che oggi c'è su sdvoe.org/ja/). Da decidere: quali lingue tradurre davvero, chi traduce (agenzia, membri, traduzione automatica rivista) e come gestirle (URL /ja/, /it/… e CMS con contenuti per lingua). Per l'arabo serve anche il layout da destra a sinistra. Bandiere: Regno Unito per l'inglese, Arabia Saudita per l'arabo, Portogallo per il portoghese, Spagna senza stemma.
+17. **Licenze di immagini e video aggiunti nel draft.** Da verificare prima del lancio:
+    - scheda InstaSwitch (home): due clip Pexels (licenza Pexels, nessuna attribuzione obbligatoria), tagliate a 6 s e ricompresse in `src/lib/assets/video/`: "Futuristic HUD Interface Display Visualization" di humanoidevfx (pexels.com/video/30744462) e "Drone shot of city with skyscrapers" di manila girl tours (pexels.com/video/9752400);
+    - monitor della stessa scheda: illustrazione fornita come `blank-screen-computer-icon-isolated-white-background.zip` (file 47727, probabilmente da Freepik): se è la licenza gratuita di Freepik serve l'attribuzione all'autore, oppure un abbonamento;
+    - loghi di Claude, OpenAI e Gemini (Lobe Icons, MIT): marchi di terzi, uso da far confermare all'alleanza o a DVIGear;
+    - foto fornite per gli sfondi (Explore, hero, sezione AI, ledwall): verificare la fonte e la licenza di ciascuna.
 
 ### Fonti per IPMX ed eventi
 - AIMS: prime 48 certificazioni IPMX, ISE 2026 (ibc.org, ravepubs.com)

@@ -36,7 +36,7 @@ dei casi studio mostrino il testo completo. Infine aggiornare la roadmap in PROG
 Base: `docs/DESIGN-dji.md` (struttura e componenti DJI). Font **Open Sans** 400/500/600. Colori **SDVoE**:
 Deep Blue `#0C67BA` per tutte le azioni, Sky Blue `#31A3E3` solo su fondi scuri, testo `#262626` / `#58595B`.
 - Riquadri e card **squadrati**; arrotondati (8px) solo pulsanti a pillola, "option card", piccole etichette e le card della home in stile store DJI (`ExploreCards`, `WhyBento`)
-- Niente ombre, tranne pannello del menu e pulsante "torna su"
+- Niente ombre, tranne pannello del menu, pulsante "torna su", hover delle card della home in stile store DJI (`ExploreCards`, `WhyBento`) e le immagini scontornate che sporgono (ledwall)
 - **Niente arancione.** Le etichette di rango (`.tier`, `--tier`) sono Deep Blue su fondo chiaro e Sky Blue su fondo scuro (`.on-dark`)
 - Icone del menu: Lucide (`@lucide/svelte`), scelte con la chiave `icon` delle voci di `nav` in site.js e mappate in Nav.svelte
 - Contrasto WCAG AA obbligatorio (i grigi DJI sono già stati scuriti)
