@@ -2,8 +2,10 @@
 	import { href } from '$lib/link.js';
 	// DJI announcement bar — one current message, editable in one place.
 	let visible = $state(true);
+	// badge: optional small label shown in a blue pill before the text
 	const msg = {
-		text: 'New: the SDVoE API now supports agentic, AI-assisted AV-over-IP workflows.',
+		badge: 'New',
+		text: 'The SDVoE API now supports agentic, AI-assisted AV-over-IP workflows.',
 		link: 'What it means for developers',
 		href: '/developers#ai'
 	};
@@ -11,7 +13,7 @@
 
 {#if visible}
 	<div class="ann" role="region" aria-label="Announcement">
-		<p>{msg.text} <a class="link" href={href(msg.href)}>{msg.link}</a></p>
+		<p>{#if msg.badge}<span class="badge">{msg.badge}</span> {/if}{msg.text} <a class="link" href={href(msg.href)}>{msg.link}</a></p>
 		<button aria-label="Dismiss announcement" onclick={() => (visible = false)}>
 			<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.4" /></svg>
 		</button>
@@ -30,6 +32,19 @@
 		font-size: var(--fs-ui);
 		text-align: center;
 		color: var(--ink);
+	}
+	/* small label: pill corners are allowed for labels; Deep Blue keeps white text AA */
+	.badge {
+		display: inline-block;
+		margin-right: 4px;
+		padding: 1px 8px;
+		border-radius: var(--r-full);
+		background: var(--sdvoe-deep-blue);
+		color: #fff;
+		font-size: var(--fs-caption);
+		font-weight: var(--w-medium);
+		line-height: 18px;
+		vertical-align: 1px;
 	}
 	button {
 		position: absolute;
